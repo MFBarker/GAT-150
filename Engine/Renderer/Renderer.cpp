@@ -1,5 +1,7 @@
-#include "Renderer.h" 
+#include "Renderer.h"
+#include "Math/Transform.h"
 #include <SDL.h> 
+#include <SDL_Image.h> 
 
 namespace neu
 {
@@ -49,4 +51,50 @@ namespace neu
 		SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawPointF(m_renderer, v.x, v.y);
 	}
+
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle, const Vector2& scale, const Vector2& registration)
+	{
+		Vector2 size = texture->GetSize();
+		size = size * scale;
+
+		Vector2 origin = size * registration;
+		Vector2 tposition = position - origin;
+
+		SDL_Rect dest;
+
+		dest.x = (int)(tposition.x);
+		dest.y = (int)(tposition.y);
+		dest.w = (int)(size.x);
+		dest.h = (int)(size.y);
+
+		SDL_Point center{ (int)origin.x , (int)origin.y };
+
+		SDL_RenderCopyEx(m_renderer, texture -> m_texture, nullptr, &dest, angle, &center, SDL_FLIP_NONE);
+	}
+
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration)
+	{
+		Vector2 size = texture->GetSize();
+		size = size * transform.scale;
+
+		Vector2 origin = size * registration;
+		Vector2 tposition = transform.position - origin;
+
+		SDL_Rect dest;
+
+		dest.x = (int)(tposition.x);
+		dest.y = (int)(tposition.y);
+		dest.w = (int)(size.x);
+		dest.h = (int)(size.y);
+
+		SDL_Point center{ (int)origin.x , (int)origin.y };
+
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+	}
+
+	Color Renderer::SetClearColor(const Color& color)
+	{
+		return Color();
+	}
+
 }

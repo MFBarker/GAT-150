@@ -17,13 +17,13 @@ namespace neu
 
 		Model(const std::string& filename);
 
-		 void Draw(neu::Renderer& renderer,const neu::Vector2& position, float angle, float scale);
+		void Draw(neu::Renderer& renderer, const neu::Vector2& position, float angle, const Vector2& scale= Vector2 { 1,1 });
 	
-		 void Load(std::string filename);
+		void Load(std::string filename);
 
-		 float CalculateRadius();
+		float CalculateRadius();
 
-		 float GetRadius() { return m_radius; }
+		float GetRadius() { return m_radius; }
 	
 	private:
 		neu::Color m_color;

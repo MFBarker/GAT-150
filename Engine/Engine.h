@@ -4,6 +4,12 @@
 #include "Core/Time.h"
 
 #include "Framework/Scene.h"
+#include "Framework/Game.h"
+
+#include "Components/PlayerComponents.h"
+#include "Components/SpriteComponent.h"
+#include "Components/AudioComponents.h"
+#include "Components/PhysicsComponents.h"
 
 #include "Math/MathUtils.h" // alternate "../Engine/Math/MathUtils.h"
 #include "Math/Random.h"
@@ -13,6 +19,7 @@
 #include "Renderer/Renderer.h"
 #include "Renderer/Model.h"
 #include "Renderer/Text.h"
+#include "Renderer/Texture.h"
 
 #include "Audio/AudioSystems.h"
 

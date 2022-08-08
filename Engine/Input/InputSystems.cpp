@@ -59,6 +59,19 @@ namespace neu
 		
 	}
 
+	InputSystem::State InputSystem::GetButtonState(uint32_t button)
+	{
+		InputSystem::State state = InputSystem::State::Idle;
+
+		bool buttonDown = GetButtonDown(button);
+		bool prevButtonDown = GetPreviousButtonDown(button);
+
+		// set the keyState if buttonDown (true) and prevButtonDown (true) 
+		// fill in the remaining states 
+
+		return state;
+	}
+
 	//State InputSystem::GetButtonState(uint32_t button)
 	//{
 	//	State state = State::Idle;

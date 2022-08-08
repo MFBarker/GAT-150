@@ -1,6 +1,7 @@
 #pragma once
 #include "..\Math\Vector2.h"
 #include "..\Math\Color.h"
+#include "Texture.h"
 
 using namespace neu;
 
@@ -9,6 +10,8 @@ struct SDL_Window;
 
 namespace neu
 {
+	struct Transform;
+
 	class Renderer
 	{
 	public:
@@ -29,8 +32,12 @@ namespace neu
 		int GetWidth() { return m_width; }
 		int GetHeight() { return m_height; }
 
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle = 0, const Vector2& scale = Vector2{ 1,1 }, const Vector2& registration = Vector2 {0.5f,0.5f});
+		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f,0.5f });
 
-		//Color SetClearColor(const Color& color);
+		friend class Texture;
+
+		Color SetClearColor(const Color& color);
 	private:
 		int m_width = 0;
 		int m_height = 0;

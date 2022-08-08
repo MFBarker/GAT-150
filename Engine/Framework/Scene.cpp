@@ -21,7 +21,7 @@ namespace neu
 		//check collision
 		for (auto iter1 = m_actors.begin();iter1 != m_actors.end(); iter1++ )
 		{
-			for (auto iter2 = m_actors.begin(); iter2 != m_actors.end(); iter++) 
+			for (auto iter2 = m_actors.begin(); iter2 != m_actors.end(); iter2++) 
 			{
 				if (iter1 == iter2) continue;
 

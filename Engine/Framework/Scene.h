@@ -28,7 +28,7 @@ namespace neu
 
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
-		Game* m_game;
+		Game* m_game = nullptr;
 	};
 
 	template<typename T>
