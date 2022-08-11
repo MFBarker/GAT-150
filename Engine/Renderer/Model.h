@@ -1,11 +1,12 @@
 #pragma once
 #include "Renderer.h"
+#include "Resource/Resource.h"
 #include <vector>
 #include <string>
 
 namespace neu
 {
-	class Model
+	class Model : public Resource
 	{
 	public:
 		Model() = default;
@@ -17,7 +18,7 @@ namespace neu
 
 		Model(const std::string& filename);
 
-		bool Create(const std::string filename);
+		bool Create(const std::string& name, void* data = nullptr) override;
 
 		void Draw(neu::Renderer& renderer, const neu::Vector2& position, float angle, const Vector2& scale= Vector2 { 1,1 });
 		void Draw(neu::Renderer& renderer, const Transform& transform );

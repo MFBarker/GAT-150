@@ -1,14 +1,13 @@
 #include "Engine.h"
 
-
-
 int main()
 {
 	//Initialize memory
 	InitializeMemory();
 	g_renderer.Initialize();
 	g_inputSystem.Initialize();
-	//g_audioSystem.Initialize();
+	g_audioSystem.Initialize();
+	g_resources.Initialize();
 
 	neu::SetFilePath("../Assets");
 
@@ -16,13 +15,18 @@ int main()
 	g_renderer.SetClearColor(neu::Color{0,0,0,255});
 
 	//create Texture
-	std::shared_ptr<neu::Texture> texture = std::make_shared<neu::Texture>();
-	texture->Create(neu::g_renderer, "Sprites/SpaceShip.png");
+	/*std::shared_ptr<neu::Texture> texture = std::make_shared<neu::Texture>();
+	texture->Create(neu::g_renderer, "Sprites/SpaceShip.png");*/
 
-	std::shared_ptr<neu::Model> model = std::make_shared<neu::Model>();
-	model->Create("Models/Player.txt");
+	std::shared_ptr<neu::Texture> texture = neu::g_resources.Get("Sprites/Spaceship", &neu::g_renderer);
 
-	g_audioSystem.AddAudio("temp", "Audio/temp.wav");
+	/*std::shared_ptr<neu::Model> model = std::make_shared<neu::Model>();
+	model->Create("Models/Player.txt");*/
+
+	std::shared_ptr<neu::Model> model = neu::g_resources.Get<neu::Model>("Models/Player.txt");
+	std::shared_ptr<neu::Model> model2 = neu::g_resources.Get<neu::Model>("Models/Player.txt");
+
+	neu::g_audioSystem.AddAudio("temp", "Audio/temp.wav");
 
 	//create actors
 	neu::Scene scene;
@@ -44,6 +48,7 @@ int main()
 	std::unique_ptr<neu::AudioComponent> acomponent = std::make_unique<neu::AudioComponent>();
 	acomponent->m_soundName = "temp";
 	actor->AddComponent(std::move(acomponent));
+
 	std::unique_ptr<neu::PhysicsComponent> phcomponent = std::make_unique<neu::PhysicsComponent>();
 	actor->AddComponent(std::move(phcomponent));
 

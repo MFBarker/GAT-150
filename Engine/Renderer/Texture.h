@@ -1,5 +1,6 @@
 #pragma once 
-#include "..\Math\Vector2.h" 
+#include "Math/Vector2.h" 
+#include "Resource/Resource.h" 
 #include <string> 
 
 struct SDL_Texture;
@@ -7,7 +8,7 @@ struct SDL_Texture;
 namespace neu
 {
 	
-	class Texture
+	class Texture : public Resource
 	{
 		friend class Renderer;
 
@@ -15,6 +16,7 @@ namespace neu
 		Texture() = default;
 		~Texture();
 
+		bool Create(const std::string& name, void* data = nullptr) override;
 		bool Create(neu::Renderer& renderer , const std::string& filename);
 
 		Vector2 GetSize() const;

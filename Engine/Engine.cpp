@@ -6,4 +6,5 @@ namespace neu
 	AudioSystem g_audioSystem;
 	InputSystem g_inputSystem;
 	Time g_time;
+	ResourceManager g_resources;
 }

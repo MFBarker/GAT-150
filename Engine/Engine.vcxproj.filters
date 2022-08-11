@@ -26,6 +26,9 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{74ea4ce4-368f-4436-9215-230caa98ce77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Resource">
+      <UniqueIdentifier>{758c1a3f-90a2-47f4-b99e-deb597cff219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="Components\ModelComponents.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>Source Files\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,15 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Texture.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Font.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>

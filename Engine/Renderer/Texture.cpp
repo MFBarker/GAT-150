@@ -16,6 +16,13 @@ namespace neu
         }
         
     }
+    bool Texture::Create(const std::string& name, void* data)
+    {
+        //
+        Renderer* renderer = static_cast<Renderer*>(data);
+
+        return Create(*renderer, name);
+    }
 
     bool Texture::Create(neu::Renderer& renderer, const std::string& filename)
     {

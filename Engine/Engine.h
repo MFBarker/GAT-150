@@ -16,13 +16,13 @@
 #include "Math/Random.h"
 
 #include "Input/InputSystems.h"
+#include "Audio/AudioSystems.h"
+#include "Resource/ResourceManager.h"
 
 #include "Renderer/Renderer.h"
 #include "Renderer/Model.h"
 #include "Renderer/Text.h"
 #include "Renderer/Texture.h"
-
-#include "Audio/AudioSystems.h"
 
 #include <iostream>
 #include <vector>
@@ -36,4 +36,5 @@ namespace neu
 	extern Time g_time;
 	extern Renderer g_renderer;
 	extern AudioSystem g_audioSystem;
+	extern ResourceManager g_resources;
 }
