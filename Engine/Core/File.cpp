@@ -1,4 +1,5 @@
 #include "File.h"
+#include "Logger.h"
 #include <filesystem>
 #include <fstream>
 
@@ -19,7 +20,11 @@ namespace neu
 	}
 	bool GetFileSize(const std::string& pathname, size_t& size)
 	{
-		if (!FileExists(pathname)) return false;
+		if (!FileExists(pathname))
+		{
+			LOG("ERROR: Could Not Read File %s", pathname.c_str());
+			return false;
+		}
 
 		size = std::filesystem::file_size(pathname);
 

@@ -13,9 +13,12 @@ namespace neu
 		Vector2() : x{ 0 }, y{ 0 } {}
 		Vector2( float x, float y ) : x{ x }, y{ y } {}
 		Vector2(float v) : x{ v }, y{ v } {}
-		//Vector2(int x, int y) : x{x}, y{y} {}
+		Vector2(int x, int y) : x{(float)x}, y{(float)y} {}
 
 		void Set(float x, float y) { this->x = x; this->y = y; }
+
+		float operator [] (size_t index) const { return (index == 0) ? x : y; }// or { return (&x)[index]; }
+		float& operator [] (size_t index) { return (index == 0) ? x : y; }
 
 		//arithmetic operators
 		Vector2 operator + (const Vector2& v) const { return Vector2{ this->x + v.x, this->y + v.y }; }
@@ -45,6 +48,7 @@ namespace neu
 
 		//comparison
 		bool operator == (const Vector2& v) const { return (this->x == v.x && this->y == v.y); }
+		bool operator != (const Vector2& v) const { return (this->x != v.x && this->y != v.y); }
 
 		//functions
 		float LengthSqr();

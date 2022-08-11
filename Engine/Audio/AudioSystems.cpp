@@ -1,7 +1,7 @@
 #include "AudioSystems.h" 
 #include "../ThirdParty/fmod/core/inc/fmod.hpp"
-#include "Texture.h"
-#include "../Core/Logger.h"
+#include "Renderer/Texture.h"
+#include "Core/Logger.h"
 
 namespace neu
 {

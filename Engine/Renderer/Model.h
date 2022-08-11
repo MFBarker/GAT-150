@@ -17,9 +17,12 @@ namespace neu
 
 		Model(const std::string& filename);
 
+		bool Create(const std::string filename);
+
 		void Draw(neu::Renderer& renderer, const neu::Vector2& position, float angle, const Vector2& scale= Vector2 { 1,1 });
+		void Draw(neu::Renderer& renderer, const Transform& transform );
 	
-		void Load(std::string filename);
+		bool Load(const std::string filename);
 
 		float CalculateRadius();
 

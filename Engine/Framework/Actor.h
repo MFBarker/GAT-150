@@ -18,6 +18,8 @@ namespace neu
 		virtual void Update() override;
 		virtual void Draw(neu::Renderer& renderer);
 
+		void AddChild(std::unique_ptr<Actor> child);
+
 		void AddComponent(std::unique_ptr<Component> component);
 
 		template<typename T>
@@ -38,11 +40,12 @@ namespace neu
 		//Physiscs
 		Vector2 m_velocity;
 		float m_damping = 1;
-
 		
 		Scene* m_scene = nullptr;
+		Actor* m_parent = nullptr;
 		
 		std::vector<std::unique_ptr<Component>> m_component;
+		std::vector<std::unique_ptr<Actor>> m_children;
 
 	};
 

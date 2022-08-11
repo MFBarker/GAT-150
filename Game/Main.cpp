@@ -1,7 +1,5 @@
 #include "Engine.h"
 
-#include <iostream>
-
 
 
 int main()
@@ -19,28 +17,43 @@ int main()
 
 	//create Texture
 	std::shared_ptr<neu::Texture> texture = std::make_shared<neu::Texture>();
-	//texture->Create(neu::g_renderer, "sf2.png");
-	//texture->Create(neu::g_renderer, "HeadEmpty.png");
 	texture->Create(neu::g_renderer, "Sprites/SpaceShip.png");
 
-	g_audioSystem.AddAudio("temp", "Audio/fart.wav");
+	std::shared_ptr<neu::Model> model = std::make_shared<neu::Model>();
+	model->Create("Models/Player.txt");
+
+	g_audioSystem.AddAudio("temp", "Audio/temp.wav");
 
 	//create actors
 	neu::Scene scene;
 
-	neu::Transform transform{ neu::Vector2{100,100} , 90 , {1,1} };
+	neu::Transform transform{ neu::Vector2{100,100} , 90 , {3,3} };
 
 	std::unique_ptr<neu::Actor> actor = std::make_unique<neu::Actor>();
 	std::unique_ptr<neu::PlayerComponent> pcomponent = std::make_unique<neu::PlayerComponent>();
 	actor->AddComponent(std::move(pcomponent));
-	std::unique_ptr<neu::SpriteComponent> scomponent = std::make_unique<neu::SpriteComponent>();
+
+	std::unique_ptr<neu::ModelComponent> mcomponent = std::make_unique<neu::ModelComponent>();
+	mcomponent->m_model = model;
+	actor->AddComponent(std::move(mcomponent));
+
+	/*std::unique_ptr<neu::SpriteComponent> scomponent = std::make_unique<neu::SpriteComponent>();
 	scomponent->m_texture = texture;
-	actor->AddComponent(std::move(scomponent));
+	actor->AddComponent(std::move(scomponent));*/
+
 	std::unique_ptr<neu::AudioComponent> acomponent = std::make_unique<neu::AudioComponent>();
-	acomponent->Play();
+	acomponent->m_soundName = "temp";
 	actor->AddComponent(std::move(acomponent));
 	std::unique_ptr<neu::PhysicsComponent> phcomponent = std::make_unique<neu::PhysicsComponent>();
 	actor->AddComponent(std::move(phcomponent));
+
+	neu::Transform transformC { neu::Vector2{40,30} , 90 , {1,1} };
+	std::unique_ptr<neu::Actor> child = std::make_unique<neu::Actor>(transformC);
+
+	std::unique_ptr<neu::ModelComponent> mcomponentC = std::make_unique<neu::ModelComponent>();
+	mcomponentC->m_model = model;
+	child->AddComponent(std::move(mcomponentC));
+	actor->AddChild(std::move(child));
 
 	scene.Add(std::move(actor));
 
