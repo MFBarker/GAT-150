@@ -9,6 +9,6 @@ namespace neu
 
 	void ResourceManager::Shutdown()
 	{
-		//
+		m_resources.clear();
 	}
 }

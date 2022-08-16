@@ -3,6 +3,7 @@
 #include "Core/Logger.h" 
 #include <SDL.h> 
 #include <SDL_image.h> 
+#include <stdarg.h>
 
 namespace neu
 {
@@ -16,12 +17,18 @@ namespace neu
         }
         
     }
-    bool Texture::Create(const std::string& name, void* data)
+    bool Texture::Create(const std::string& name, ...)
     {
         //
-        Renderer* renderer = static_cast<Renderer*>(data);
+        va_list args;
 
-        return Create(*renderer, name);
+        va_start(args, name);
+
+        Renderer& renderer = va_arg(args, Renderer);
+
+        va_end(args);
+
+        return Create(renderer, name);
     }
 
     bool Texture::Create(neu::Renderer& renderer, const std::string& filename)

@@ -16,7 +16,7 @@ namespace neu
 		Texture() = default;
 		~Texture();
 
-		bool Create(const std::string& name, void* data = nullptr) override;
+		bool Create(const std::string& name, ...) override;
 		bool Create(neu::Renderer& renderer , const std::string& filename);
 
 		Vector2 GetSize() const;

@@ -9,32 +9,24 @@ int main()
 	g_audioSystem.Initialize();
 	g_resources.Initialize();
 
+	neu::Engine::Instance().Register();
+
 	neu::SetFilePath("../Assets");
 
 	g_renderer.CreateWindow("Neumont", 800, 600);
 	g_renderer.SetClearColor(neu::Color{0,0,0,255});
 
-	//create Texture
-	/*std::shared_ptr<neu::Texture> texture = std::make_shared<neu::Texture>();
-	texture->Create(neu::g_renderer, "Sprites/SpaceShip.png");*/
-
-	std::shared_ptr<neu::Texture> texture = neu::g_resources.Get("Sprites/Spaceship", &neu::g_renderer);
-
-	/*std::shared_ptr<neu::Model> model = std::make_shared<neu::Model>();
-	model->Create("Models/Player.txt");*/
-
-	std::shared_ptr<neu::Model> model = neu::g_resources.Get<neu::Model>("Models/Player.txt");
-	std::shared_ptr<neu::Model> model2 = neu::g_resources.Get<neu::Model>("Models/Player.txt");
-
-	neu::g_audioSystem.AddAudio("temp", "Audio/temp.wav");
+	
 
 	//create actors
 	neu::Scene scene;
 
 	neu::Transform transform{ neu::Vector2{100,100} , 90 , {3,3} };
 
-	std::unique_ptr<neu::Actor> actor = std::make_unique<neu::Actor>();
-	std::unique_ptr<neu::PlayerComponent> pcomponent = std::make_unique<neu::PlayerComponent>();
+	//std::unique_ptr<neu::Actor> actor = std::make_unique<neu::Actor>(transform);
+	std::unique_ptr<neu::Actor> actor = neu::Factory::Instance().Create<neu::Actor>("Actor");
+	actor->m_transform = transform;
+	std::unique_ptr<neu::Component> pcomponent = neu::Factory::Instance().Create<neu::PlayerComponent>("PlayerComponent");
 	actor->AddComponent(std::move(pcomponent));
 
 	std::unique_ptr<neu::ModelComponent> mcomponent = std::make_unique<neu::ModelComponent>();
@@ -49,7 +41,7 @@ int main()
 	acomponent->m_soundName = "temp";
 	actor->AddComponent(std::move(acomponent));
 
-	std::unique_ptr<neu::PhysicsComponent> phcomponent = std::make_unique<neu::PhysicsComponent>();
+	std::unique_ptr<neu::Component> phcomponent = neu::Factory::Instance().Create<neu::PhysicsComponent>("PhysicsComponent");
 	actor->AddComponent(std::move(phcomponent));
 
 	neu::Transform transformC { neu::Vector2{40,30} , 90 , {1,1} };
@@ -72,7 +64,7 @@ int main()
 		neu::g_time.Tick();
 		neu::g_inputSystem.Update();
 		//neu::g_audioSystems.Update;
-		//neu::PlayerComponent::Update();
+		//actor->Update();
 
 		if (g_inputSystem.GetKeyDown(key_escape)) quit = true;
 

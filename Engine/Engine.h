@@ -5,6 +5,8 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 #include "Components/PlayerComponents.h"
 #include "Components/SpriteComponent.h"
@@ -37,4 +39,10 @@ namespace neu
 	extern Renderer g_renderer;
 	extern AudioSystem g_audioSystem;
 	extern ResourceManager g_resources;
+
+	class Engine : public Singleton<Engine>
+	{
+	public:
+		void Register();
+	};
 }

@@ -18,7 +18,7 @@ namespace neu
 
 		Model(const std::string& filename);
 
-		bool Create(const std::string& name, void* data = nullptr) override;
+		bool Create(const std::string& name, ...) override;
 
 		void Draw(neu::Renderer& renderer, const neu::Vector2& position, float angle, const Vector2& scale= Vector2 { 1,1 });
 		void Draw(neu::Renderer& renderer, const Transform& transform );
@@ -30,7 +30,7 @@ namespace neu
 		float GetRadius() { return m_radius; }
 	
 	private:
-		neu::Color m_color;
+		neu::Color m_color = {255,255,255,255};
 		std::vector<neu::Vector2> m_points;
 
 		float m_radius = 0;
