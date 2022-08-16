@@ -24,7 +24,7 @@ namespace neu
 
         va_start(args, name);
 
-        Renderer& renderer = va_arg(args, Renderer);
+        Renderer& renderer = va_arg(args , Renderer);
 
         va_end(args);
 
