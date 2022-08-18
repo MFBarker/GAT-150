@@ -106,6 +106,9 @@
     <ClCompile Include="Serialization\JSON.cpp">
       <Filter>Source Files\Serialization</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Transform.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -214,6 +217,9 @@
       <Filter>Source Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Serialization\JSON.h">
+      <Filter>Source Files\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization\Serialization.h">
       <Filter>Source Files\Serialization</Filter>
     </ClInclude>
   </ItemGroup>

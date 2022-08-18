@@ -3,16 +3,23 @@
 #include "Matrix2x2.h"
 #include "Matrix3x3.h"
 #include "MathUtils.h"
+#include "Serialization/Serialization.h"
 
 namespace neu
 {
-	struct Transform
+	struct Transform : public ISerializable
 	{
 		Vector2 position;
 		float rotation;
 		Vector2 scale { 1, 1 };
 
 		Matrix3x3 matrix;
+
+		Transform(const Vector2& position, float rotation, const Vector2& scale) :
+			position{ position },
+			rotation{ rotation },
+			scale{ scale }
+		{}
 
 		void Update()
 		{
@@ -49,6 +56,9 @@ namespace neu
 
 			return { mxT * mxR * mxS };
 		}
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 	};
 }

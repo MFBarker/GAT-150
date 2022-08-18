@@ -6,11 +6,11 @@
 namespace neu
 {
 	//foward declaration
-	//class Actor;
+	class Actor;
 	class Renderer;
 	class Game;
 
-	class Scene
+	class Scene : public ISerializable
 	{
 	public:
 		Scene() = default;
@@ -26,9 +26,14 @@ namespace neu
 
 		Game* GetGame() { return m_game; }
 
+		// Inherited via ISerializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
 		Game* m_game = nullptr;
+
 	};
 
 	template<typename T>

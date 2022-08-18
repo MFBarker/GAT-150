@@ -21,7 +21,7 @@ namespace neu
 
 		if (g_inputSystem.GetKeyDown(key_up) == InputSystem::State::Held)
 		{
-			thrust = 100;
+			thrust = speed;
 		}
 		if (g_inputSystem.GetKeyDown(key_down) == InputSystem::State::Held)
 		{
@@ -57,6 +57,18 @@ namespace neu
 		if (m_owner->m_transform.position.y > neu::g_renderer.GetHeight()) m_owner->m_transform.position.y = 0;
 		if (m_owner->m_transform.position.y > 0) m_owner->m_transform.position.y = (float)neu::g_renderer.GetHeight();
 		*/
+		
+	}
+
+	bool PlayerComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+	bool PlayerComponent::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value,speed);
+
+		return true;
 	}
 }
 

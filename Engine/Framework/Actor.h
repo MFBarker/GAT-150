@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Serialization/Serialization.h"
 #include "Component.h"
 #include <vector>
 #include <memory>
@@ -9,7 +10,7 @@ namespace neu
 	class Scene;
 	class Renderer;
 
-	class Actor : public GameObject
+	class Actor : public GameObject, public ISerializable
 	{
 	public:
 		Actor() = default;
@@ -22,19 +23,29 @@ namespace neu
 
 		void AddComponent(std::unique_ptr<Component> component);
 
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
 		template<typename T>
 		T* GetComponent();
 
 		virtual void OnCollision(Actor* other) {}
 		float GetRadius() { return 0; }//m_model.GetRadius()* std::max(m_transform.scale.x, m_transform.scale.y);}
 	
-		std::string& GetTag() { return m_tag; }
+		std::string& GetTag() { return tag; }
+		std::string& SetTag(const std::string& tag) { this->tag = tag; }
+
+		std::string& GetName() { return name; }
+		std::string& SetName(const std::string& name) { this->name = name; }
 
 		friend class Scene;
 
 		neu::Transform m_transform;
 	protected:
-		std::string m_tag;
+		std::string name;
+		std::string tag;
+
+
 		bool m_destroy = false;
 
 		//Physiscs

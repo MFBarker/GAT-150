@@ -20,7 +20,7 @@ namespace neu
     bool Texture::Create(const std::string& name, ...)
     {
         //
-        va_list args;
+        /*va_list args;
 
         va_start(args, name);
 
@@ -28,7 +28,9 @@ namespace neu
 
         va_end(args);
 
-        return Create(renderer, name);
+        return Create(renderer, name);*/
+
+        return false;
     }
 
     bool Texture::Create(neu::Renderer& renderer, const std::string& filename)

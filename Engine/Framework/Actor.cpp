@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Factory.h"
 #include "Components/RenderComponent.h"
 
 namespace neu
@@ -46,6 +47,32 @@ namespace neu
 	{
 		component->m_owner = this;
 		m_component.push_back(std::move(component));
+	}
+
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, name);
+		READ_DATA(value, tag);
+
+		m_transform.Read(value["transform"]);
+
+		if (value.HasMember("components") && value["components"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				READ_DATA(componentValue, type);
+
+				auto component = Factory::Instance().Create<Component>(type);
+				AddComponent(std::move(component));
+			}
+		}
+
+		return true;
 	}
 
 }
