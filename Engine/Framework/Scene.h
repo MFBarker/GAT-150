@@ -10,13 +10,15 @@ namespace neu
 	class Renderer;
 	class Game;
 
-	class Scene : public ISerializable
+	class Scene : public GameObject, public ISerializable
 	{
 	public:
 		Scene() = default;
 		~Scene() = default;
 
-		void Update();
+		void Initialize() override;
+
+		void Update() override;
 		void Draw(Renderer& renderer);
 
 		void Add(std::unique_ptr<Actor> actor);

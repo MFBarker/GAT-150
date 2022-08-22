@@ -9,6 +9,7 @@ int main()
 	g_inputSystem.Initialize();
 	g_audioSystem.Initialize();
 	g_resources.Initialize();
+	g_physicsSystem.Initialize();
 
 	neu::Engine::Instance().Register();
 
@@ -27,6 +28,7 @@ int main()
 	assert(success);
 
 	scene.Read(document);
+	scene.Initialize();
 
 	float angle = 0;
 
@@ -37,8 +39,8 @@ int main()
 		//update (engine)
 		neu::g_time.Tick();
 		neu::g_inputSystem.Update();
+		neu::g_physicsSystem.Update();
 		//neu::g_audioSystems.Update;
-		//actor->Update();
 
 		if (g_inputSystem.GetKeyDown(key_escape)) quit = true;
 
@@ -51,10 +53,10 @@ int main()
 
 		scene.Draw(neu::g_renderer);
 
-		//neu::g_renderer.Draw(texture, { 400, 300 }, angle, {2,2},{0.5f,0.5f});
-
 		neu::g_renderer.EndFrame();//End Frame
 	}
+
+	//scene.RemoveAll();
 
 	//Shutdown
 	//g_inputSystem.ShutDown;

@@ -17,10 +17,10 @@ namespace neu
         }
         
     }
-    bool Texture::Create(const std::string& name, ...)
+    bool Texture::Create(const std::string name, ...)
     {
         //
-        /*va_list args;
+        va_list args;
 
         va_start(args, name);
 
@@ -28,9 +28,7 @@ namespace neu
 
         va_end(args);
 
-        return Create(renderer, name);*/
-
-        return false;
+        return Create(renderer, name);
     }
 
     bool Texture::Create(neu::Renderer& renderer, const std::string& filename)
@@ -44,6 +42,12 @@ namespace neu
         {
             LOG("Error Loading %s", filename.c_str());
             SDL_FreeSurface(surface);
+            return false;
+        }
+
+        if (m_texture == nullptr)
+        {
+            LOG(SDL_GetError());
             return false;
         }
 

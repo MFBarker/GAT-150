@@ -9,6 +9,7 @@ namespace neu
 	public:
 		AudioComponent() = default;
 
+		void Initialize() override;
 		void Update() override;
 
 		void Play();

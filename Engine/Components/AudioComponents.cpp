@@ -3,6 +3,9 @@
 
 namespace neu
 {
+	void AudioComponent::Initialize()
+	{
+	}
 	void AudioComponent::Update()
 	{
 		//g_audioSystem
@@ -40,5 +43,6 @@ namespace neu
 			}
 			return true;
 		}
+		return true;
 	}
 }

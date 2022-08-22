@@ -9,9 +9,9 @@ namespace neu
 	class Font : public Resource
 	{
 	public:
-		//FOnt() =default
-		//Font(string& filename, int fontSize);
-		//~Font();
+		Font() = default;
+		Font(const std::string& filename, int fontSize);
+		~Font();
 
 		bool Create(const std::string& name, ...) override;
 		//void load

@@ -66,6 +66,8 @@ namespace neu
 	}
 	bool PlayerComponent::Read(const rapidjson::Value& value)
 	{
+		std::string player_name;
+		READ_DATA(value,player_name);
 		READ_DATA(value,speed);
 
 		return true;

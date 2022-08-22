@@ -13,9 +13,11 @@ namespace neu
 	class Actor : public GameObject, public ISerializable
 	{
 	public:
+
 		Actor() = default;
 		Actor(const Transform& transform) : m_transform{ transform } {}
 		
+		void Initialize() override;
 		virtual void Update() override;
 		virtual void Draw(neu::Renderer& renderer);
 
@@ -40,7 +42,7 @@ namespace neu
 
 		friend class Scene;
 
-		neu::Transform m_transform;
+		neu::Transform m_transform = Transform(0,0,{1,1});
 	protected:
 		std::string name;
 		std::string tag;
@@ -49,8 +51,8 @@ namespace neu
 		bool m_destroy = false;
 
 		//Physiscs
-		Vector2 m_velocity;
-		float m_damping = 1;
+		Vector2 velocity;
+		float damping = 1;
 		
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;

@@ -4,6 +4,18 @@
 
 namespace neu
 {
+	void Actor::Initialize()
+	{
+		for (auto& component : m_component)
+		{
+			component->Initialize();
+		}
+		for (auto& child : m_children)
+		{
+			child->Initialize();
+		}
+	}
+
 	void Actor::Update()
 	{
 		for (auto& component : m_component)
@@ -68,6 +80,7 @@ namespace neu
 				READ_DATA(componentValue, type);
 
 				auto component = Factory::Instance().Create<Component>(type);
+
 				AddComponent(std::move(component));
 			}
 		}

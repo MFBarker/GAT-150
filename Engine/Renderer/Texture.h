@@ -7,6 +7,7 @@ struct SDL_Texture;
 
 namespace neu
 {
+	class Renderer;
 	
 	class Texture : public Resource
 	{
@@ -16,12 +17,12 @@ namespace neu
 		Texture() = default;
 		~Texture();
 
-		bool Create(const std::string& name, ...) override;
+		bool Create(const std::string name, ...) override;
 		bool Create(neu::Renderer& renderer , const std::string& filename);
 
 		Vector2 GetSize() const;
 
-	private:
 		SDL_Texture* m_texture = nullptr;
+	private:
 	};
 }

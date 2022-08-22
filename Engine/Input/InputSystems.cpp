@@ -42,15 +42,6 @@ namespace neu
 		const uint8_t* keyboardState = SDL_GetKeyboardState(nullptr);
 		std::copy(keyboardState, keyboardState + m_numKeys, m_keyboardState.begin());
 
-		//std::cout << (bool)m_keyboardState[SDL_SCANCODE_SPACE] << std::endl;
-
-		/*for (auto state : m_keyboardState)
-		{
-			std::cout << (bool)state;
-		}
-		std::cout << std::endl;*/
-
-		
 
 		m_prevMouseButtonState = m_mouseButtonState;
 		int x, y;
@@ -68,21 +59,24 @@ namespace neu
 
 		// set the keyState if buttonDown (true) and prevButtonDown (true) 
 		// fill in the remaining states 
+		if (buttonDown == true && prevButtonDown == true)
+		{
+			state = State::Held;
+		}
+		else if (buttonDown == true && prevButtonDown == false)
+		{
+			state = State::Released;
+		}
+		else if (buttonDown == false && prevButtonDown == true)
+		{
+			state = State::Pressed;
+		}
+		else if (buttonDown == false && prevButtonDown == false)
+		{
+			state = State::Idle;
+		}
 
 		return state;
 	}
-
-	//State InputSystem::GetButtonState(uint32_t button)
-	//{
-	//	State state = State::Idle;
-
-	//	bool buttonDown = GetButtonDown(button);
-	//	bool prevButtonDown = GetPreviousButtonDown(button);
-
-	//	// set the keyState if buttonDown (true) and prevButtonDown (true) 
-	//	// fill in the remaining states 
-
-	//	return state;
-	//}
 }
 

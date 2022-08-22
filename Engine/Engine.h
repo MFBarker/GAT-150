@@ -16,6 +16,7 @@
 #include "Components/AudioComponents.h"
 #include "Components/PhysicsComponents.h"
 #include "Components/ModelComponents.h"
+#include "Components/SprAnimComponent.h"
 
 #include "Math/MathUtils.h" // alternate "../Engine/Math/MathUtils.h"
 #include "Math/Random.h"
@@ -28,6 +29,8 @@
 #include "Renderer/Model.h"
 #include "Renderer/Text.h"
 #include "Renderer/Texture.h"
+
+#include "Physics/PhysicsSystem.h"
 
 #include <iostream>
 #include <vector>
@@ -42,6 +45,7 @@ namespace neu
 	extern Renderer g_renderer;
 	extern AudioSystem g_audioSystem;
 	extern ResourceManager g_resources;
+	extern PhysicsSystem g_physicsSystem;
 
 	class Engine : public Singleton<Engine>
 	{

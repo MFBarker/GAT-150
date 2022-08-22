@@ -3,6 +3,7 @@
 #include "Core/Logger.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
+#include "Math/Rect.h"
 #include <fstream>
 
 namespace neu
@@ -31,7 +32,7 @@ namespace neu
 			}
 
 			return true;
-		}
+		}//
 
 		bool Get(const rapidjson::Value& value, const std::string& name, int& data)
 		{
@@ -48,7 +49,7 @@ namespace neu
 			data = value[name.c_str()].GetInt();
 
 			return true;
-		}
+		}//
 
 		bool Get(const rapidjson::Value& value, const std::string& name, float& data)
 		{
@@ -65,7 +66,8 @@ namespace neu
 			data = value[name.c_str()].GetFloat();
 
 			return true;
-		}
+		}//
+
 		bool Get(const rapidjson::Value& value, const std::string& name, bool& data)
 		{
 			// check if 'name' member exists and is of type 
@@ -81,7 +83,8 @@ namespace neu
 			data = value[name.c_str()].GetBool();
 
 			return true;
-		}
+		}//
+
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
 		{
 			// check if 'name' member exists and is of type 
@@ -97,7 +100,8 @@ namespace neu
 			data = value[name.c_str()].GetString();
 
 			return true;
-		}
+		}//
+
 		bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data)
 		{
 			// check if 'name' member exists and is an array with 2 elements 
@@ -124,7 +128,8 @@ namespace neu
 			}
 
 			return true;
-		}
+		}//
+
 		bool Get(const rapidjson::Value& value, const std::string& name, Color& data)
 		{
 			// check if 'name' member exists and is an array with 4 elements 
@@ -151,6 +156,27 @@ namespace neu
 			}
 
 			return true;
-		}
+		}//
+
+		bool Get(const rapidjson::Value& value, const std::string& name, Rect& data)
+		{
+			// check if 'name' member exists and is an array with 4 elements 
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+			{
+				LOG("error reading json data %s", name.c_str());
+				return false;
+
+			}
+
+			// create json array object 
+			auto& array = value[name.c_str()];
+			// get array values 
+			data.x = array[0].GetInt();
+			data.y = array[0].GetInt();
+			data.w = array[0].GetInt();
+			data.h = array[0].GetInt();
+
+			return true;
+		}//
 	}
 }

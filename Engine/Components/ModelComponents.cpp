@@ -3,6 +3,10 @@
 #include "Framework/Actor.h"
 #include "Engine.h"
 
+void neu::ModelComponent::Initialize()
+{
+}
+
 void neu::ModelComponent::Update()
 {
 	//

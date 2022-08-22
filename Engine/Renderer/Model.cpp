@@ -12,7 +12,7 @@ namespace neu
 		m_radius = CalculateRadius();
 	}
 
-	bool Model::Create(const std::string& name, ...)
+	bool Model::Create(const std::string name, ...)
 	{
 		if (!Load(name))
 		{
