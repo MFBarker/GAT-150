@@ -55,7 +55,7 @@ namespace neu
 		{
 			// check if 'name' member exists and is of type 
 
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsFloat() ==
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() ==
 				false)
 			{
 				LOG("error reading json data %s", name.c_str());

@@ -80,8 +80,12 @@ namespace neu
 				READ_DATA(componentValue, type);
 
 				auto component = Factory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
 
-				AddComponent(std::move(component));
 			}
 		}
 

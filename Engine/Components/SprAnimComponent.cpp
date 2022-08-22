@@ -18,7 +18,7 @@ namespace neu
 			}
 		}
 
-		Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_row };
+		Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
 
 		int column = (frame - 1) % num_columns;
 		int row = (frame - 1) / num_columns;
@@ -48,7 +48,7 @@ namespace neu
 
 		READ_DATA(value, fps);
 		READ_DATA(value, num_columns);
-		READ_DATA(value, num_row);
+		READ_DATA(value, num_rows);
 		READ_DATA(value, start_frame);
 		READ_DATA(value, end_frame);
 

@@ -95,7 +95,7 @@ namespace neu
 
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration)
 	{
-		Vector2 size = texture->GetSize();
+		Vector2 size = Vector2{source.w,source.h};
 		size = size * transform.scale;
 
 		Vector2 origin = size * registration;

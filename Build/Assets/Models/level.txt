@@ -13,7 +13,7 @@
                2,
                2
             ],
-            "rotation":"0.0"
+            "rotation":0.0
          },
          "components":[
             {
@@ -21,18 +21,14 @@
                "speed":"200"
             },
             {
-               "type":"ModelComponent",
-               "model_name":"Models/Player.txt"
-            },
-            {
                "type":"PhysicsComponent",
-               "damping":"0.99"
+               "damping":0.99
             },
             {
                "type":"SprAnimComponent",
                "texture_name":"Sprites/gothic-hero-run.png",
                "fps":12,
-               "num_colums":12,
+               "num_columns":12,
                "num_rows":1,
                "start_frame":1,
                "end_frame":12
