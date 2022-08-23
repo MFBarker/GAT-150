@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="Audio\AudioSystems.cpp" />
     <ClCompile Include="Components\AudioComponents.cpp" />
+    <ClCompile Include="Components\CollisionComponent.cpp" />
     <ClCompile Include="Components\ModelComponents.cpp" />
     <ClCompile Include="Components\PhysicsComponents.cpp" />
     <ClCompile Include="Components\PlayerComponents.cpp" />
@@ -199,6 +200,7 @@
   <ItemGroup>
     <ClInclude Include="Audio\AudioSystems.h" />
     <ClInclude Include="Components\AudioComponents.h" />
+    <ClInclude Include="Components\CollisionComponent.h" />
     <ClInclude Include="Components\ModelComponents.h" />
     <ClInclude Include="Components\PhysicsComponents.h" />
     <ClInclude Include="Components\PlayerComponents.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Physics\Collision.h" />
     <ClInclude Include="Physics\PhysicsSystem.h" />
     <ClInclude Include="Renderer\Font.h" />
     <ClInclude Include="Renderer\Model.h" />

@@ -150,6 +150,12 @@
       <Project>{f082f490-dc10-4d26-961a-50d4991bcf8f}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Build\Assets\Models\Bullet.txt" />
+    <Text Include="..\Build\Assets\Models\Enemy.txt" />
+    <Text Include="..\Build\Assets\Models\level.txt" />
+    <Text Include="..\Build\Assets\Models\Player.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

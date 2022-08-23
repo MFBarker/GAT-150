@@ -15,8 +15,10 @@
 #include "Components/SpriteComponent.h"
 #include "Components/AudioComponents.h"
 #include "Components/PhysicsComponents.h"
+#include "Components/RBPhysicsComponent.h"
 #include "Components/ModelComponents.h"
 #include "Components/SprAnimComponent.h"
+#include "Components/CollisionComponent.h"
 
 #include "Math/MathUtils.h" // alternate "../Engine/Math/MathUtils.h"
 #include "Math/Random.h"
