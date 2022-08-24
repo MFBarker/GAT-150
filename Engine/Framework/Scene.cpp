@@ -6,7 +6,7 @@ namespace neu
 {
 	void Scene::Initialize()
 	{
-		for (auto& actor : m_actors) {  }
+		for (auto& actor : m_actors) { actor->Initialize(); }
 	}
 	void Scene::Update()
 	{
@@ -54,6 +54,11 @@ namespace neu
 		actor->m_scene = this;
 		m_actors.push_back(std::move(actor));
 
+	}
+
+	void Scene::RemoveAll()
+	{
+		m_actors.clear();
 	}
 
 	bool Scene::Write(const rapidjson::Value& value) const

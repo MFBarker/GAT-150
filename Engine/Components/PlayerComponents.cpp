@@ -4,6 +4,16 @@
 
 namespace neu
 {
+	void PlayerComponent::Initialize()
+	{
+		auto component = m_owner->GetComponent<CollisionComponent>();
+		if (component)
+		{
+			component->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
+			component->SetCollisionExit(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
+		}
+	}
+
 	void PlayerComponent::Update()
 	{
 		float thrust = 0;
@@ -61,6 +71,20 @@ namespace neu
 		if (m_owner->m_transform.position.y > 0) m_owner->m_transform.position.y = (float)neu::g_renderer.GetHeight();
 		*/
 		
+	}
+
+	void PlayerComponent::OnCollisionEnter(Actor* other) 
+	{
+		if (other->GetName() == "Coin")
+		{
+			other->SetDestroy();
+		}
+
+		std::cout << "player enter/n";
+	}
+	void PlayerComponent::OnCollisionExit(Actor* other)
+	{
+		std::cout << "player exit/n";
 	}
 
 	bool PlayerComponent::Write(const rapidjson::Value& value) const

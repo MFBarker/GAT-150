@@ -1,26 +1,5 @@
 {
    "actors":[
-     {
-         "type":"Actor",
-         "name":"Background",
-         "transform":{
-            "position":[
-               400,
-               300
-            ],
-            "scale":[
-               1,
-               1
-            ],
-            "rotation":0
-         },
-         "components":[
-            {
-               "type":"SpriteComponent",
-               "texture_name":"Sprites/background.png"
-            }
-         ]
-      },
       {
          "type":"Actor",
          "name":"Floor",
@@ -83,7 +62,7 @@
                "pitch":2
             }, 
             {
-               "type":"SpriteAnimComponent",
+               "type":"SprAnimComponent",
                "texture_name":"Sprites/gothic-hero-run.png",
                "fps":12,
                "num_columns":12,

@@ -4,6 +4,7 @@
 #include <string> 
 
 struct SDL_Texture;
+struct SDL_Surface;
 
 namespace neu
 {
@@ -19,6 +20,7 @@ namespace neu
 
 		bool Create(const std::string name, ...) override;
 		bool Create(neu::Renderer& renderer , const std::string& filename);
+		bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 
 		Vector2 GetSize() const;
 

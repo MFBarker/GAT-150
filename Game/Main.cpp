@@ -56,10 +56,13 @@ int main()
 		neu::g_renderer.EndFrame();//End Frame
 	}
 
-	//scene.RemoveAll();
+	scene.RemoveAll();
 
 	//Shutdown
 	//g_inputSystem.ShutDown();
+	//g_physicsSystem.ShutDown();
 	g_renderer.Shutdown();
 	g_audioSystem.Shutdown();
+	g_resources.Shutdown();
+	g_renderer.Shutdown();
 }

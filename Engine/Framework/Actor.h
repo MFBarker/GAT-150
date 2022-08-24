@@ -40,6 +40,8 @@ namespace neu
 		std::string& GetName() { return name; }
 		std::string& SetName(const std::string& name) { this->name = name; }
 
+		void SetDestroy() { m_destroy = true; }
+
 		friend class Scene;
 
 		neu::Transform m_transform = Transform(0,0,{1,1});
