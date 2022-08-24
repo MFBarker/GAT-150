@@ -20,9 +20,6 @@
     <Filter Include="Source Files\Framework">
       <UniqueIdentifier>{f4b373a1-3c3a-4a27-ae9f-d683e665e7c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\AudioSystems">
-      <UniqueIdentifier>{deba2e75-2db3-4a5e-b5e2-7824e1d70cd6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{74ea4ce4-368f-4436-9215-230caa98ce77}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,9 @@
     </Filter>
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{358f5ad2-a1fd-4ce7-ac5a-4b9a39790572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{deba2e75-2db3-4a5e-b5e2-7824e1d70cd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +68,7 @@
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Audio\AudioSystems.cpp">
-      <Filter>Source Files\AudioSystems</Filter>
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Texture.cpp">
       <Filter>Source Files\Renderer</Filter>
@@ -124,6 +124,9 @@
     <ClCompile Include="Components\CollisionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Audio\AudioChannel.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.h">
@@ -172,7 +175,7 @@
       <Filter>Source Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Audio\AudioSystems.h">
-      <Filter>Source Files\AudioSystems</Filter>
+      <Filter>Source Files\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Game.h">
       <Filter>Source Files\Framework</Filter>
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="Components\CollisionComponent.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioChannel.h">
+      <Filter>Source Files\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

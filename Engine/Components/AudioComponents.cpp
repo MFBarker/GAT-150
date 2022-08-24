@@ -1,48 +1,57 @@
-#include "AudioComponents.h"
-#include "Engine.h"
+#include "AudioComponents.h" 
+#include "Engine.h" 
 
 namespace neu
 {
+	AudioComponent::~AudioComponent()
+	{
+		// !! call Stop() to stop the audio channel when destroyed 
+		Stop();
+	}
+
 	void AudioComponent::Initialize()
 	{
+		if (play_on_start)
+		{
+			// !! call Play() to start the audio if playing on awake (start) 
+			if (play_on_start)
+			{
+				Play();
+			}
+		}
 	}
+
 	void AudioComponent::Update()
 	{
-		//g_audioSystem
 	}
 
 	void AudioComponent::Play()
 	{
+		m_channel.Stop();
+		m_channel = g_audioSystem.PlayAudio(sound_name, volume, pitch, loop);
 	}
 
 	void AudioComponent::Stop()
 	{
+		m_channel.Stop();
 	}
 
 	bool AudioComponent::Write(const rapidjson::Value& value) const
 	{
 		return true;
 	}
+
 	bool AudioComponent::Read(const rapidjson::Value& value)
 	{
-		if (!value.HasMember("actors") || !value["actors"].IsArray())
-		{
-			return false;
-		}
+		// !! READ_DATA on sound_name, volume, ... 
+		READ_DATA(value, sound_name);
+		READ_DATA(value, volume);
+		READ_DATA(value, pitch);
+		READ_DATA(value, play_on_start);
+		READ_DATA(value, loop);
 
-		for (auto& actorValue : value["actors"].GetArray())
-		{
-			std::string type;
-			READ_DATA(actorValue, type);
+		g_audioSystem.AddAudio(sound_name, sound_name);
 
-			auto actor = Factory::Instance().Create<Actor>(type);
-			if (actor)
-			{
-				//read actor
-				actor->Read(actorValue);
-			}
-			return true;
-		}
 		return true;
 	}
 }

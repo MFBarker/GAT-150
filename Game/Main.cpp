@@ -40,7 +40,7 @@ int main()
 		neu::g_time.Tick();
 		neu::g_inputSystem.Update();
 		neu::g_physicsSystem.Update();
-		//neu::g_audioSystems.Update;
+		neu::g_audioSystem.Update();
 
 		if (g_inputSystem.GetKeyDown(key_escape)) quit = true;
 
@@ -59,7 +59,7 @@ int main()
 	//scene.RemoveAll();
 
 	//Shutdown
-	//g_inputSystem.ShutDown;
+	//g_inputSystem.ShutDown();
 	g_renderer.Shutdown();
-	//g_audioSystem.Shutdown();
+	g_audioSystem.Shutdown();
 }

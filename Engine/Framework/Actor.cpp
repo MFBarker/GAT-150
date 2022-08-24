@@ -70,7 +70,7 @@ namespace neu
 		READ_DATA(value, name);
 		READ_DATA(value, tag);
 
-		m_transform.Read(value["transform"]);
+		if (value.HasMember("transform")) m_transform.Read(value["transform"]);
 
 		if (value.HasMember("components") && value["components"].IsArray())
 		{

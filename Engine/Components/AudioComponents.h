@@ -1,6 +1,6 @@
-#pragma once
-#include "Framework/Component.h"
-#include <string>
+#pragma once 
+#include "Framework/Component.h" 
+#include "Audio/AudioChannel.h" 
 
 namespace neu
 {
@@ -8,21 +8,24 @@ namespace neu
 	{
 	public:
 		AudioComponent() = default;
+		~AudioComponent(); // !! this is added (stop play when destroyed) 
 
-		void Initialize() override;
+		void Initialize() override; // !! this is added (create definition) 
 		void Update() override;
-
-		void Play();
-		void Stop();
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		void Play();
+		void Stop();
+
 	public:
-		std::string m_soundName;
-		bool m_playOnAwake = false;
-		bool m_loop = false;
-		float m_volume = 1;
-		float m_pitch = 1;
+		AudioChannel m_channel;
+
+		std::string sound_name;
+		float volume = 1;
+		float pitch = 1;
+		bool play_on_start = false;
+		bool loop = false;
 	};
 }

@@ -76,6 +76,12 @@
                "type":"CollisionComponent",
                "data.size": [48, 48]
             },
+            { 
+               "type":"AudioComponent", 
+               "sound_name":"Audio/temp.wav", 
+               "play_on_start":true,
+               "pitch":2
+            }, 
             {
                "type":"SpriteAnimComponent",
                "texture_name":"Sprites/gothic-hero-run.png",
@@ -86,6 +92,18 @@
                "end_frame":12
             }
          ]
-      }
+      },
+      { 
+         "type":"Actor", 
+         "name":"Music", 
+         "components":[ 
+            { 
+               "type":"AudioComponent", 
+               "sound_name":"Audio/music.mp3", 
+               "loop":true, 
+               "play_on_start":true 
+            } 
+         ] 
+      } 
    ]
 }
