@@ -84,8 +84,8 @@ namespace neu
 				actor->Read(actorValue);
 				Add(std::move(actor));
 			}
-			return true;
 		}
+			return true;
 	}
 }
 

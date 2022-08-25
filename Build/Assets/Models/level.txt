@@ -1,5 +1,26 @@
 {
    "actors":[
+   {
+         "type":"Actor",
+         "name":"Background",
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "scale":[
+               1,
+               1
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "texture_name":"Sprites/background.png"
+            }
+         ]
+      },
       {
          "type":"Actor",
          "name":"Floor",
