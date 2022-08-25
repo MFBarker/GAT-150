@@ -10,6 +10,9 @@ namespace neu
 	class SprAnimComponent : public RenderComponent
 	{
 	public:
+
+		CLASS_DECLARATION(SprAnimComponent)
+
 		//void Initialize() override;
 
 		// Inherited via RenderComponent

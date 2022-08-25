@@ -7,6 +7,8 @@ namespace neu
 
 	class ModelComponent : public RenderComponent
 	{
+		CLASS_DECLARATION(ModelComponent)
+
 		void Initialize() override;
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;

@@ -10,8 +10,12 @@ namespace neu
 	class SpriteComponent : public RenderComponent
 	{
 	public:
-		//void Initialize() override;
 
+
+		CLASS_DECLARATION(SpriteComponent)
+
+		//void Initialize() override;
+		
 		// Inherited via RenderComponent
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;

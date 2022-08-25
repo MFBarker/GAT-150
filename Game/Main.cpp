@@ -30,7 +30,14 @@ int main()
 	scene.Read(document);
 	scene.Initialize();
 
-	float angle = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		auto actor = neu::Factory::Instance().Create<Actor>("Coin");
+		actor->m_transform.position = { neu::randomf(0,800),100.0f};
+		actor->Initialize();
+
+		scene.Add(std::move(actor));
+	}
 
 	bool quit = false;
 
