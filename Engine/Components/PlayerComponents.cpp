@@ -20,20 +20,20 @@ namespace neu
 
 		// update transform with input
 		Vector2 direction = Vector2::zero;
-		if (g_inputSystem.GetKeyDown(key_left) == InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_left) && InputSystem::State::Held)
 		{
 			direction = Vector2::left;
 		}
-		if (g_inputSystem.GetKeyDown(key_right) == InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_right) && InputSystem::State::Held)
 		{
 			direction = Vector2::right;
 		}
 
-		if (g_inputSystem.GetKeyDown(key_up) == InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_up) && InputSystem::State::Held)
 		{
 			thrust = speed;
 		}
-		if (g_inputSystem.GetKeyDown(key_down) == InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_down) && InputSystem::State::Held)
 		{
 			direction = Vector2::down;
 		}
@@ -80,11 +80,11 @@ namespace neu
 			other->SetDestroy();
 		}
 
-		std::cout << "player enter/n";
+		std::cout << "player enter \n";
 	}
 	void PlayerComponent::OnCollisionExit(Actor* other)
 	{
-		std::cout << "player exit/n";
+		std::cout << "player exit \n";
 	}
 
 	bool PlayerComponent::Write(const rapidjson::Value& value) const

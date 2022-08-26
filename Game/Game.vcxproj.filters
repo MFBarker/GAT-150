@@ -13,24 +13,44 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{75ae4827-c24a-487c-8f8a-fc9959116703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Scenes">
+      <UniqueIdentifier>{44e225ac-9170-4a7a-bfbc-ba98671ab377}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Models\Bullet.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models</Filter>
     </Text>
     <Text Include="..\Build\Assets\Models\Enemy.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="..\Build\Assets\Models\level.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models</Filter>
     </Text>
     <Text Include="..\Build\Assets\Models\Player.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models</Filter>
     </Text>
+    <Text Include="..\Build\Assets\Scenes\level.txt">
+      <Filter>Resource Files\Scenes</Filter>
+    </Text>
+    <Text Include="..\Build\Assets\Scenes\prefabs.txt">
+      <Filter>Resource Files\Scenes</Filter>
+    </Text>
+    <Text Include="..\Build\Assets\Scenes\tilemap.txt">
+      <Filter>Resource Files\Scenes</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyGame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

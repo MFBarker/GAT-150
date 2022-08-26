@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "MyGame.h"
 
 int main()
 {
@@ -20,24 +21,9 @@ int main()
 
 	//std::shared_ptr<neu::Texture> texture = neu::g_resources.Get<neu::Texture>("Sprites/Spaceship", &neu::g_renderer);
 
-	//create actors
-	neu::Scene scene;
-
-	rapidjson::Document document;
-	bool success = neu::json::Load("Models/level.txt", document);
-	assert(success);
-
-	scene.Read(document);
-	scene.Initialize();
-
-	for (int i = 0; i < 10; i++)
-	{
-		auto actor = neu::Factory::Instance().Create<Actor>("Coin");
-		actor->m_transform.position = { neu::randomf(0,800),100.0f};
-		actor->Initialize();
-
-		scene.Add(std::move(actor));
-	}
+	//create Game
+	std::unique_ptr<MyGame> game = std::make_unique<MyGame>();
+	game->Initialize();
 
 	bool quit = false;
 
@@ -53,21 +39,23 @@ int main()
 
 		//angle += 90.0f * neu::g_time.deltaTime;//rotate
 
-		scene.Update();
+		game->Update();
 
 		//render
 		neu::g_renderer.BeginFrame();//Begin Frame
 
-		scene.Draw(neu::g_renderer);
+		game->Draw(neu::g_renderer);
 
 		neu::g_renderer.EndFrame();//End Frame
 	}
 
-	scene.RemoveAll();
+	game->Shutdown();
+	game.reset();
+	neu::Factory::Instance().Shutdown();
 
 	//Shutdown
-	//g_inputSystem.ShutDown();
-	//g_physicsSystem.ShutDown();
+	g_inputSystem.Shutdown();
+	g_physicsSystem.Shutdown();
 	g_renderer.Shutdown();
 	g_audioSystem.Shutdown();
 	g_resources.Shutdown();

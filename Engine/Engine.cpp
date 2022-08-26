@@ -20,5 +20,7 @@ namespace neu
 		REGISTER_CLASS(PlayerComponent);
 		REGISTER_CLASS(SpriteComponent);
 		REGISTER_CLASS(SprAnimComponent);
+		REGISTER_CLASS(CollisionComponent);
+		REGISTER_CLASS(TilemapComponent);
 	}
 }

@@ -177,6 +177,7 @@
     <ClCompile Include="Components\RBPhysicsComponent.cpp" />
     <ClCompile Include="Components\SprAnimComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
+    <ClCompile Include="Components\TilemapComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
     <ClCompile Include="Core\Logger.cpp" />
     <ClCompile Include="Core\Memory.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="Components\SprAnimComponent.h" />
     <ClInclude Include="Components\SpriteComponent.h" />
+    <ClInclude Include="Components\TilemapComponent.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Logger.h" />
     <ClInclude Include="Core\Memory.h" />

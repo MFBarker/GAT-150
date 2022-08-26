@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MyGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -153,8 +154,13 @@
   <ItemGroup>
     <Text Include="..\Build\Assets\Models\Bullet.txt" />
     <Text Include="..\Build\Assets\Models\Enemy.txt" />
-    <Text Include="..\Build\Assets\Models\level.txt" />
     <Text Include="..\Build\Assets\Models\Player.txt" />
+    <Text Include="..\Build\Assets\Scenes\level.txt" />
+    <Text Include="..\Build\Assets\Scenes\prefabs.txt" />
+    <Text Include="..\Build\Assets\Scenes\tilemap.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
