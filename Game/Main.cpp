@@ -11,6 +11,7 @@ int main()
 	g_audioSystem.Initialize();
 	g_resources.Initialize();
 	g_physicsSystem.Initialize();
+	g_eventManager.Initialize();
 
 	neu::Engine::Instance().Register();
 
@@ -60,4 +61,5 @@ int main()
 	g_audioSystem.Shutdown();
 	g_resources.Shutdown();
 	g_renderer.Shutdown();
+	g_eventManager.Shutdown();
 }

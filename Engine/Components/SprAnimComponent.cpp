@@ -17,7 +17,16 @@ namespace neu
 				frame = start_frame;
 			}
 		}
+	}
 
+	void SprAnimComponent::Draw(Renderer& renderer)
+	{
+		renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
+	}
+
+	Rect& SprAnimComponent::GetSource()
+	{
+		// calculate source rect 
 		Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
 
 		int column = (frame - 1) % num_columns;
@@ -27,11 +36,8 @@ namespace neu
 		source.y = (int)(row * cellSize.y);
 		source.w = (int)(cellSize.x);
 		source.h = (int)(cellSize.y);
-	}
 
-	void SprAnimComponent::Draw(Renderer& renderer)
-	{
-		renderer.Draw(m_texture, source, m_owner->m_transform);
+		return source;
 	}
 
 	bool SprAnimComponent::Write(const rapidjson::Value& value) const

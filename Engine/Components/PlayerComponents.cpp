@@ -77,7 +77,18 @@ namespace neu
 	{
 		if (other->GetName() == "Coin")
 		{
+			Event event;
+			event.name = "EVENT_ADD_POINTS";
+			event.data = 100;
+
+			g_eventManager.Notify(event);
 			other->SetDestroy();
+		}
+
+		if (other->GetName() == "Enemy")
+		{
+			//reduce HP and check for death
+			//if death notify all things
 		}
 
 		std::cout << "player enter \n";

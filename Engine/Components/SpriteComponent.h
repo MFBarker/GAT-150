@@ -1,6 +1,5 @@
 #pragma once
 #include "RenderComponent.h"
-#include "Math/Rect.h"
 
 namespace neu
 {
@@ -10,8 +9,6 @@ namespace neu
 	class SpriteComponent : public RenderComponent
 	{
 	public:
-
-
 		CLASS_DECLARATION(SpriteComponent)
 
 		//void Initialize() override;
@@ -24,7 +21,6 @@ namespace neu
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		Rect source;
 		std::shared_ptr<Texture> m_texture;
 	};
 }
