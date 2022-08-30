@@ -8,17 +8,30 @@ namespace neu
 	{
 		auto component = m_owner->GetComponent<RBPhysicsComponent>();
 
-		// if data was not set, get size from render component source rect 
-		if (data.size.x == 0 && data.size.y == 0)
+		if (component)
 		{
-			// !! check render component from the owner 
-			auto renderComponent = m_owner->GetComponent<RenderComponent>();
-			if (renderComponent)
+			// if data was not set, get size from render component source rect 
+			if (data.size.x == 0 && data.size.y == 0)
 			{
-				data.size = Vector2{renderComponent->GetSource().w, renderComponent->GetSource().h };
+				// !! check render component from the owner 
+				auto renderComponent = m_owner->GetComponent<RenderComponent>();
+				if (renderComponent)
+				{
+					data.size = Vector2{ renderComponent->GetSource().w, renderComponent->GetSource().h };
+				}
+			}
+
+			data.size = data.size * scale_offset; //*m_owner->m_transform.scale;
+
+			if (component->m_body->GetType() == b2_staticBody)
+			{
+				g_physicsSystem.SetCollisionBoxStatic(component->m_body, data, m_owner);
+			}
+			else
+			{
+				g_physicsSystem.SetCollisionBox(component->m_body, data, m_owner);
 			}
 		}
-
 	}
 	void CollisionComponent::Update()
 	{
@@ -45,6 +58,7 @@ namespace neu
 		READ_DATA(value, data.restitution);
 		READ_DATA(value, data.is_trigger);
 
+		READ_DATA(value, scale_offset);
 
 		return true;
 	}

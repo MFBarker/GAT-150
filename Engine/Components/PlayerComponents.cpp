@@ -6,12 +6,10 @@ namespace neu
 {
 	void PlayerComponent::Initialize()
 	{
-		auto component = m_owner->GetComponent<CollisionComponent>();
-		if (component)
-		{
-			component->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
-			component->SetCollisionExit(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
-		}
+		CharacterComponent::Initialize();
+
+		g_eventManager.Subscribe("EVENT_PICKUP", std::bind(&CharacterComponent::OnNotify, this, std::placeholders::_1), m_owner);
+		g_eventManager.Subscribe("EVENT_HEALTH", std::bind(&CharacterComponent::OnNotify, this, std::placeholders::_1), m_owner);
 	}
 
 	void PlayerComponent::Update()
@@ -20,32 +18,30 @@ namespace neu
 
 		// update transform with input
 		Vector2 direction = Vector2::zero;
-		if (g_inputSystem.GetKeyDown(key_left) && InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_left) == (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::left;
 		}
-		if (g_inputSystem.GetKeyDown(key_right) && InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_right) == (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::right;
 		}
 
-		if (g_inputSystem.GetKeyDown(key_up) && InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_up) == (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			thrust = speed;
 		}
-		if (g_inputSystem.GetKeyDown(key_down) && InputSystem::State::Held)
+		if (g_inputSystem.GetKeyDown(key_down) == (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::down;
 		}
 
+		Vector2 velocity;
 		auto acomponent = m_owner->GetComponent<PhysicsComponent>();
 		if (acomponent)
 		{
-			//Vector2 force = Vector2::Rotate( { 1, 0 },math::DegToRad(m_owner->m_transform.rotation))* thrust;
 			acomponent->ApplyForce(direction * speed);
-
-			//force = (Vector2{400,300} - m_owner->m_transform.position).Normalized() * 60.0f;
-			//acomponent->ApplyForce(force);
+			velocity = acomponent->velocity;
 		}
 
 
@@ -57,20 +53,37 @@ namespace neu
 			auto acomponent = m_owner->GetComponent<PhysicsComponent>();
 			if (acomponent)
 			{
-				//Vector2 force = Vector2::Rotate( { 1, 0 },math::DegToRad(m_owner->m_transform.rotation))* thrust;
 				acomponent->ApplyForce(Vector2::up * speed);
 
-				//force = (Vector2{400,300} - m_owner->m_transform.position).Normalized() * 60.0f;
 			}
 		}
 
-		//Wrap
-		/*if (m_owner->m_transform.position.x > neu::g_renderer.GetWidth()) m_owner->m_transform.position.x = 0;
-		if (m_owner->m_transform.position.x > 0) m_owner->m_transform.position.x = (float)neu::g_renderer.GetWidth();
-		if (m_owner->m_transform.position.y > neu::g_renderer.GetHeight()) m_owner->m_transform.position.y = 0;
-		if (m_owner->m_transform.position.y > 0) m_owner->m_transform.position.y = (float)neu::g_renderer.GetHeight();
-		*/
-		
+		auto renderComponent = m_owner->GetComponent<RenderComponent>();
+		if (renderComponent)
+		{
+			if (velocity.x != 0) renderComponent->SetFlipHorizontal(velocity.x < 0);
+		}
+	}
+
+	void PlayerComponent::OnNotify(const Event& event)
+	{
+		if (event.name == "EVENT_DAMAGE")
+		{
+			health -= std::get<float>(event.data);
+			if (health <= 0)
+			{
+				m_owner->SetDestroy();
+
+				Event event;
+				event.name = "EVENT_PLAYER_DEAD";
+
+				g_eventManager.Notify(event);
+			}
+		}
+		if (event.name == "EVENT_HEALTH")
+		{
+			health += std::get<float>(event.data);
+		}
 	}
 
 	void PlayerComponent::OnCollisionEnter(Actor* other) 
@@ -87,8 +100,12 @@ namespace neu
 
 		if (other->GetName() == "Enemy")
 		{
-			//reduce HP and check for death
-			//if death notify all things
+			Event event;
+			event.name = "EVENT_DAMAGE";
+			event.data = damage;
+			event.reciever = other;
+
+			neu::g_eventManager.Notify(event);
 		}
 
 		std::cout << "player enter \n";
@@ -104,11 +121,14 @@ namespace neu
 	}
 	bool PlayerComponent::Read(const rapidjson::Value& value)
 	{
+		CharacterComponent::Read(value);
+
 		std::string player_name;
 		READ_DATA(value,player_name);
-		READ_DATA(value,speed);
+		READ_DATA(value,jump);
 
 		return true;
 	}
+	
 }
 

@@ -2,7 +2,7 @@
 #include "Framework/Game.h"
 #include "Framework/Event.h"
 
-class MyGame : public neu::Game
+class MyGame : public neu::Game, public neu::INotify
 {
 public:
 	enum class gameState
@@ -21,11 +21,11 @@ public:
 	virtual void Update() override;
 	virtual void Draw(neu::Renderer& renderer) override;
 
-	void OnAddPoints(const neu::Event& event);
-	void OnPlayerDead(const neu::Event& event);
-
 private:
 	gameState m_gameState = gameState::Title_Screen;
 	float m_stateTimer = 0;
 	int m_lives = 3;
+
+	// Inherited via INotify
+	virtual void OnNotify(const neu::Event& event) override;
 };

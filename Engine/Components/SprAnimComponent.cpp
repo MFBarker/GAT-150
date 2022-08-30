@@ -21,7 +21,7 @@ namespace neu
 
 	void SprAnimComponent::Draw(Renderer& renderer)
 	{
-		renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
+		renderer.Draw(m_texture, GetSource(), m_owner->m_transform, registration, flipHorizontal);
 	}
 
 	Rect& SprAnimComponent::GetSource()

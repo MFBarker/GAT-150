@@ -1,8 +1,11 @@
 #include "MyGame.h"
 #include "Engine.h"
+#include "GameComponents/EnemyComponent.h"
 
 void MyGame::Initialize()
 {
+	REGISTER_CLASS(EnemyComponent);
+
 	m_scene = std::make_unique<neu::Scene>();
 
 	rapidjson::Document document;
@@ -25,7 +28,10 @@ void MyGame::Initialize()
 
 	m_gameState = gameState::Title_Screen;
 
-	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnAddPoints, this, std::placeholders::_1));
+	std::cout << "HINT: Press ENTER to Start \n";
+
+	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnNotify, this, std::placeholders::_1));
+	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnNotify, this, std::placeholders::_1));
 }
 
 void MyGame::Shutdown()
@@ -38,6 +44,7 @@ void MyGame::Update()
 	switch (m_gameState) 
 	{
 	case gameState::Title_Screen:
+
 		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
 		{
 			//m_scene->GetActorFromName("Title")->SetActive(false);
@@ -49,6 +56,14 @@ void MyGame::Update()
 		for (int i = 0; i < 10; i++)
 		{
 			auto actor = neu::Factory::Instance().Create<Actor>("Coin");
+			actor->m_transform.position = { neu::randomf(0,800),100.0f };
+			actor->Initialize();
+
+			m_scene->Add(std::move(actor));
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			auto actor = neu::Factory::Instance().Create<Actor>("Ghost");
 			actor->m_transform.position = { neu::randomf(0,800),100.0f };
 			actor->Initialize();
 
@@ -81,14 +96,16 @@ void MyGame::Draw(neu::Renderer& renderer)
 	m_scene->Draw(renderer);
 }
 
-void MyGame::OnAddPoints(const neu::Event& event)
+void MyGame::OnNotify(const neu::Event& event)
 {
-	std::cout << event.name << std::endl;
-	std::cout << std::get<int>(event.data) << std::endl;
-}
-
-void MyGame::OnPlayerDead(const neu::Event& event)
-{
-	m_gameState = gameState::Player_Dead;
-	m_stateTimer = 3;
+	if (event.name == "EVENT_ADD_POINTS")
+	{
+		std::cout << event.name << std::endl;
+		std::cout << std::get<int>(event.data) << std::endl;
+	}
+	if (event.name == "EVENT_PLAYER_DEAD")
+	{
+		m_gameState = gameState::Player_Dead;
+		m_stateTimer = 3;
+	}
 }

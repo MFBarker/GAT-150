@@ -2,6 +2,7 @@
 #include "Math/Transform.h"
 #include "Math/Rect.h"
 #include <SDL.h> 
+#include <SDL_ttf.h> 
 #include <SDL_Image.h> 
 
 namespace neu
@@ -9,11 +10,13 @@ namespace neu
 	void Renderer::Initialize()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
+		TTF_Init();
 	}
 	void Renderer::Shutdown()
 	{
 		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyWindow(m_window);
+		TTF_Quit();
 	}
 	void Renderer::CreateWindow(const char* name, int width, int height)
 	{
@@ -93,7 +96,7 @@ namespace neu
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, transform.rotation, &center, SDL_FLIP_NONE);
 	}
 
-	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration)
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration, bool flipH)
 	{
 		Vector2 size = Vector2{source.w,source.h};
 		size = size * transform.scale;
@@ -118,7 +121,8 @@ namespace neu
 
 		SDL_Point center{ (int)origin.x , (int)origin.y };
 
-		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, transform.rotation, &center, SDL_FLIP_NONE);
+		SDL_RendererFlip flip = (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, &src, &dest, transform.rotation, &center, flip);
 	}
 
 	Color Renderer::SetClearColor(const Color& color)
