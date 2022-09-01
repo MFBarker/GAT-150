@@ -9,6 +9,7 @@ namespace neu
 	public:
 		CLASS_DECLARATION(CameraComponent)
 
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 

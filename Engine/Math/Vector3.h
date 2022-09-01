@@ -17,8 +17,8 @@ namespace neu
 
 		void Set(float x, float y, float z) { this->x = x; this->y = y; this->z = z; }
 
-		float operator [] (size_t index) const { return (index == 0) ? x : y; }// or { return (&x)[index]; }
-		float& operator [] (size_t index) { return (index == 0) ? x : y; }
+		float operator [] (size_t index) const { return (&x)[index]; }// or { return (&x)[index]; }
+		float& operator [] (size_t index) { return (&x)[index]; }
 
 		//arithmetic operators
 		Vector3 operator + (const Vector3& v) const { return Vector3{ this->x + v.x, this->y + v.y, this->z + v.z }; }

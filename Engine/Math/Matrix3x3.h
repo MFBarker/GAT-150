@@ -98,7 +98,7 @@ namespace neu
 	{
 		//non-uniform scale
 
-		Matrix3x3 mx;
+		Matrix3x3 mx = identity;
 
 		mx[0][0] = scale.x;
 		mx[1][1] = scale.y;
@@ -109,8 +109,11 @@ namespace neu
 	inline Matrix3x3 Matrix3x3::CreateScale(float scale)
 	{
 		//Uniform scale
+		// x 0 0
+		// 0 y 0
+		// 0 0 1
 
-		Matrix3x3 mx;
+		Matrix3x3 mx = identity;
 
 		mx[0][0] = scale;
 		mx[1][1] = scale;

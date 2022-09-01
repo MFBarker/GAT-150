@@ -20,6 +20,8 @@ namespace neu
 
     bool Font::Create(const std::string name, ...)
     {
+        Load(name, 30);
+
         return false;
     }
     bool Font::Load(const std::string& filename, int fontSize)

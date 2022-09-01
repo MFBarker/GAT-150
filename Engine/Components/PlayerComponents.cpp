@@ -18,20 +18,20 @@ namespace neu
 
 		// update transform with input
 		Vector2 direction = Vector2::zero;
-		if (g_inputSystem.GetKeyDown(key_left) == (InputSystem::State::Held || InputSystem::State::Pressed))
+		if (g_inputSystem.GetKeyDown(key_left) && (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::left;
 		}
-		if (g_inputSystem.GetKeyDown(key_right) == (InputSystem::State::Held || InputSystem::State::Pressed))
+		if (g_inputSystem.GetKeyDown(key_right) && (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::right;
 		}
 
-		if (g_inputSystem.GetKeyDown(key_up) == (InputSystem::State::Held || InputSystem::State::Pressed))
+		if (g_inputSystem.GetKeyDown(key_up) && (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			thrust = speed;
 		}
-		if (g_inputSystem.GetKeyDown(key_down) == (InputSystem::State::Held || InputSystem::State::Pressed))
+		if (g_inputSystem.GetKeyDown(key_down) && (InputSystem::State::Held || InputSystem::State::Pressed))
 		{
 			direction = Vector2::down;
 		}

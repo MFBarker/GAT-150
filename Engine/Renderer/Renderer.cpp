@@ -21,12 +21,14 @@ namespace neu
 		SDL_DestroyWindow(m_window);
 		TTF_Quit();
 	}
-	void Renderer::CreateWindow(const char* name, int width, int height)
+	void Renderer::CreateWindow(const char* name, int width, int height, bool fullscreen)
 	{
 		m_width = width;
 		m_height = height;
 
-		m_window = SDL_CreateWindow(name, 100, 100, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		int flags = (fullscreen) ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+
+		m_window = SDL_CreateWindow(name, 100, 100, width, height, flags);
 		m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 	}
 	void Renderer::BeginFrame()

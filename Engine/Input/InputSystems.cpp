@@ -11,6 +11,7 @@ namespace neu
 	const uint32_t key_right = SDL_SCANCODE_RIGHT;
 	const uint32_t key_escape = SDL_SCANCODE_ESCAPE;
 	const uint32_t key_enter = SDL_SCANCODE_RETURN;
+	const uint32_t key_death = SDL_SCANCODE_R;
 
 	const uint32_t button_left = 0;
 	const uint32_t button_middle = 1;

@@ -22,7 +22,7 @@ namespace neu
 		void Initialize();
 		void Shutdown();
 
-		void CreateWindow(const char* name, int width, int height);
+		void CreateWindow(const char* name, int width, int height, bool fullscreen = false);
 		void BeginFrame();
 		void EndFrame();
 

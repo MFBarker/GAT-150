@@ -18,6 +18,10 @@ int main()
 	neu::SetFilePath("../Assets");
 
 	g_renderer.CreateWindow("Neumont", 800, 600);
+
+	//fullscreen (seriously don't use it)
+	//g_renderer.CreateWindow("Neumont", 800, 600, true);
+
 	g_renderer.SetClearColor(neu::Color{0,0,0,255});
 
 	//std::shared_ptr<neu::Texture> texture = neu::g_resources.Get<neu::Texture>("Sprites/Spaceship", &neu::g_renderer);

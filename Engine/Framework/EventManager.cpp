@@ -24,7 +24,18 @@ void neu::EventManager::Subscribe(const std::string& name, Event::functionPtr fu
 
 void neu::EventManager::Unsubscribe(const std::string& name, GameObject* reciever)
 {
-	//
+	// get list of observers for event
+	auto& observers = m_events[name];
+
+	// remove observer with matching receiver from observers
+	for (auto iter = observers.begin(); iter != observers.end(); iter++)
+	{
+		if (iter->reciever == reciever)
+		{
+			observers.erase(iter);
+			break;
+		}
+	}
 }
 
 void neu::EventManager::Notify(const Event& event)

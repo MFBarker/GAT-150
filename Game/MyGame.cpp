@@ -43,6 +43,7 @@ void MyGame::Update()
 	switch (m_gameState) 
 	{
 	case gameState::Title_Screen:
+		m_scene->GetActorFromName("Title")->SetActive(true);
 
 		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
 		{
@@ -78,6 +79,10 @@ void MyGame::Update()
 		auto component = actor->GetComponent<neu::TextComponent>();
 		component->SetText(std::to_string(m_score));
 	}
+	if (g_inputSystem.GetKeyDown(key_death) == neu::InputSystem::Pressed)
+	{
+		m_gameState = gameState::Game_Over;
+	}
 		g_inputSystem.Update();
 		break;
 	case gameState::Player_Dead:
@@ -89,7 +94,14 @@ void MyGame::Update()
 		break;
 
 	case gameState::Game_Over:
-		//GameOver Title Active
+		m_scene->GetActorFromName("Score")->SetActive(false);
+		m_scene->GetActorFromName("GameOver")->SetActive(false);
+
+		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
+		{
+			m_scene->GetActorFromName("Title")->SetActive(false);
+			m_gameState = gameState::Title_Screen;
+		}
 		break;
 	}
 
