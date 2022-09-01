@@ -26,28 +26,23 @@ namespace neu
     {
         m_ttfFont = TTF_OpenFont(filename.c_str(), fontSize);
 
+        if (m_ttfFont == nullptr)
+        {
+            LOG("SDL ERROR (Font::Load): %s",SDL_GetError());
+
+        }
+
         return m_ttfFont;
     }
 
     SDL_Surface* Font::CreateSurface(const std::string& text, const Color& color)
     {
-        // !! convert Color color to SDL_Color c 
-        // !! get address of color (&) 
-        // !! cast to SDL_Color 
-        // !! dereference 
-        SDL_Color con;
-        con.r = color.r;
-        con.b = color.b;
-        con.g = color.g;
-        con.a = color.a;
-
-        SDL_Color c = con;
+        SDL_Color c = *((SDL_Color*)(&color));
         SDL_Surface* surface = TTF_RenderText_Solid(m_ttfFont, text.c_str(), c);
 
-        // !! check if surface is nullptr, if so then LOG error 
         if (!surface)
         {
-            LOG(SDL_GetError());
+            LOG("SDL ERROR (Font::CreateSurface): %s", SDL_GetError());
         }
 
         return surface;

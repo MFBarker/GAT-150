@@ -31,7 +31,6 @@ void MyGame::Initialize()
 	std::cout << "HINT: Press ENTER to Start \n";
 
 	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnNotify, this, std::placeholders::_1));
-	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnNotify, this, std::placeholders::_1));
 }
 
 void MyGame::Shutdown()
@@ -47,7 +46,8 @@ void MyGame::Update()
 
 		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
 		{
-			//m_scene->GetActorFromName("Title")->SetActive(false);
+			m_scene->GetActorFromName("Title")->SetActive(false);
+			m_scene->GetActorFromName("Score")->SetActive(true);
 			m_gameState = gameState::Level_Start;
 		}
 		break;
@@ -73,6 +73,11 @@ void MyGame::Update()
 		break;
 
 	case gameState::Game:
+	{
+		auto actor = m_scene->GetActorFromName("Score");
+		auto component = actor->GetComponent<neu::TextComponent>();
+		component->SetText(std::to_string(m_score));
+	}
 		g_inputSystem.Update();
 		break;
 	case gameState::Player_Dead:
@@ -102,6 +107,7 @@ void MyGame::OnNotify(const neu::Event& event)
 	{
 		std::cout << event.name << std::endl;
 		std::cout << std::get<int>(event.data) << std::endl;
+		m_score += std::get<int>(event.data);
 	}
 	if (event.name == "EVENT_PLAYER_DEAD")
 	{

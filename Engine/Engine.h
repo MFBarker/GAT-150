@@ -14,6 +14,7 @@
 #include "Framework/EventManager.h"
 
 #include "Components/AudioComponents.h"
+#include "Components/CameraComponent.h"
 #include "Components/CharacterComponent.h"
 #include "Components/CollisionComponent.h"
 #include "Components/ModelComponents.h"

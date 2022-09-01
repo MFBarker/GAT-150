@@ -26,14 +26,18 @@ namespace neu
 
 	bool TextComponent::Read(const rapidjson::Value& value)
 	{
-		std::string font_name;
-		int font_size;
-
 		READ_DATA(value, font_name);
 		READ_DATA(value, font_size);
+		READ_DATA(value, text);
 
 		m_font = g_resources.Get<Font>(font_name, font_size);// !! Get<Font> from g_resources, passing in font_name and font_size
+		/*if (m_font == NULL)
+		{
+			m_font = Font(font_name, font_size);
+		}*/
+
 		m_texture = std::make_unique<Texture>();
+
 
 		SetText(text);
 

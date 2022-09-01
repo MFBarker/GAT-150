@@ -47,7 +47,7 @@ namespace neu
 
         if (m_texture == nullptr)
         {
-            LOG(SDL_GetError());
+            LOG("SDL ERROR(Texture::Create): %s",SDL_GetError());
             return false;
         }
 
@@ -62,17 +62,22 @@ namespace neu
 
         // create texture 
         // !! call SDL_CreateTextureFromSurface passing in renderer and surface 
-        //m_texture = SDL_CreateTextureFromSurface(renderer,surface);
+        m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer,surface);
 
-        // !! call SDL_FreeSurface passing in surface (surface no longer needed) 
+        if (surface == nullptr)
+        {
+            LOG("Error Loading Surface %s");
+            SDL_FreeSurface(surface);
+            return false;
+        }
 
-       // !! check if m_texture is nullptr, if so then LOG error and return false 
        if (m_texture == nullptr)
        {
-                LOG(SDL_GetError());
+                LOG("Texture::Create from surface (m_texture = null)", SDL_GetError());
                 return false;
        }
 
+       SDL_FreeSurface(surface);
         return true;
     }
 

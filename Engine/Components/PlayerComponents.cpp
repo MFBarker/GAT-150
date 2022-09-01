@@ -44,24 +44,40 @@ namespace neu
 			velocity = acomponent->velocity;
 		}
 
-
-		//m_owner->m_transform.position += direction * 300 * g_time.deltaTime;
+		// set camera 
+		auto camera = m_owner->GetScene()->GetActorFromName("Camera");
+		if (camera)
+		{
+			camera->m_transform.position = math::Lerp(camera -> m_transform.position, m_owner->m_transform.position, 2 * g_time.deltaTime);
+		}
 
 		//jump
-		if (g_inputSystem.GetKeyDown(key_space) == InputSystem::State::Pressed)
+		if (m_groundCount > 0 && g_inputSystem.GetKeyDown(key_space) == InputSystem::State::Pressed)
 		{
-			auto acomponent = m_owner->GetComponent<PhysicsComponent>();
-			if (acomponent)
+			Vector2 velocity;
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			if (component)
 			{
-				acomponent->ApplyForce(Vector2::up * speed);
+				// if in the air (m_groundCount == 0) then reduce force 
+				float multiplier = (m_groundCount > 0) ? 1 : 0.2f;
 
+				component->ApplyForce(direction * speed * multiplier);
+				velocity = component->velocity;
 			}
 		}
 
-		auto renderComponent = m_owner->GetComponent<RenderComponent>();
-		if (renderComponent)
+		auto animComponent = m_owner->GetComponent<SprAnimComponent>();
+		if (animComponent)
 		{
-			if (velocity.x != 0) renderComponent->SetFlipHorizontal(velocity.x < 0);
+			if (velocity.x != 0) animComponent->SetFlipHorizontal(velocity.x < 0);
+			if (std::fabs(velocity.x) > 0)
+			{
+				animComponent->SetSequence("run");
+			}
+			else
+			{
+				animComponent->SetSequence("idle");
+			}
 		}
 	}
 
@@ -88,6 +104,11 @@ namespace neu
 
 	void PlayerComponent::OnCollisionEnter(Actor* other) 
 	{
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount++;
+		}
+
 		if (other->GetName() == "Coin")
 		{
 			Event event;
@@ -112,6 +133,11 @@ namespace neu
 	}
 	void PlayerComponent::OnCollisionExit(Actor* other)
 	{
+		if (other->GetTag() == "Ground")
+		{
+			m_groundCount--;
+		}
+
 		std::cout << "player exit \n";
 	}
 

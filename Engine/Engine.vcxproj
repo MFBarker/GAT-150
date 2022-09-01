@@ -170,6 +170,7 @@
     <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystems.cpp" />
     <ClCompile Include="Components\AudioComponents.cpp" />
+    <ClCompile Include="Components\CameraComponent.cpp" />
     <ClCompile Include="Components\CharacterComponent.cpp" />
     <ClCompile Include="Components\CollisionComponent.cpp" />
     <ClCompile Include="Components\ModelComponents.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Audio\AudioChannel.h" />
     <ClInclude Include="Audio\AudioSystems.h" />
     <ClInclude Include="Components\AudioComponents.h" />
+    <ClInclude Include="Components\CameraComponent.h" />
     <ClInclude Include="Components\CharacterComponent.h" />
     <ClInclude Include="Components\CollisionComponent.h" />
     <ClInclude Include="Components\ModelComponents.h" />

@@ -9,7 +9,9 @@ void EnemyComponent::Initialize()
 
 void EnemyComponent::Update()
 {
-    /*auto actor = m_owner->GetScene()->GetActorFromName("Player");
+    //deleted function error: wont run at all
+
+    auto actor = m_owner->GetScene()->GetActorFromName("Player");
     if (actor)
     {
         neu::Vector2 direction = actor->m_transform.position - m_owner->m_transform.position;
@@ -17,7 +19,7 @@ void EnemyComponent::Update()
 
         auto component = m_owner->GetComponent<neu::PhysicsComponent>();
         if (component) component->ApplyForce(force);
-    }*/
+    }
 }
 
 void EnemyComponent::OnCollisionEnter(neu::Actor* other)

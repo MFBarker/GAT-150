@@ -66,7 +66,7 @@ namespace neu
 	inline T* Scene::GetActorFromName(const std::string& name)
 	{
 		//  !! for loop (range based) through m_actors
-		for (auto actor : m_actors)
+		for (auto& actor : m_actors)
 		{
 			//  !! compare name to actor GetName()) 
 			if (actor->GetName() == name)

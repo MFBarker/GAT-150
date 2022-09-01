@@ -21,6 +21,7 @@ namespace neu
 		SDL_Surface* CreateSurface(const std::string& text, const Color& color);
 
 		friend class Text;
+		friend class TextComponent;
 	private:
 		_TTF_Font* m_ttfFont = nullptr;
 	};

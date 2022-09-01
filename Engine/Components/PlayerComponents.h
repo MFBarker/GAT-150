@@ -24,5 +24,6 @@ namespace neu
 
 	public:
 		float jump = 30;
+		int m_groundCount = 0;
 	};
 }

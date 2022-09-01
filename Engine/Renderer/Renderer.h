@@ -1,6 +1,7 @@
 #pragma once
-#include "..\Math\Vector2.h"
-#include "..\Math\Color.h"
+#include "Math/Vector2.h"
+#include "Math/Color.h"
+#include "Math/Matrix3x3.h"
 #include "Texture.h"
 
 using namespace neu;
@@ -37,6 +38,9 @@ namespace neu
 		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f,0.5f });
 		void Draw(std::shared_ptr<Texture> texture, const Rect& source, const Transform& transform, const Vector2& registration = Vector2{ 0.5f,0.5f }, bool flipH = false);
 
+		void SetViewMatrix(const Matrix3x3& view) { m_view = view; }
+		void SetViewportMatrix(const Matrix3x3& viewport) { m_viewport = viewport; }
+
 		friend class Texture;
 		friend class Text;
 
@@ -44,6 +48,9 @@ namespace neu
 	private:
 		int m_width = 0;
 		int m_height = 0;
+
+		Matrix3x3 m_view;
+		Matrix3x3 m_viewport;
 
 		Color m_clearColor{0,0,0,255};
 

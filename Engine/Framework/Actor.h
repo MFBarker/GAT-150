@@ -59,6 +59,7 @@ namespace neu
 		std::string name;
 		std::string tag;
 		bool active = true;
+		float lifespan = 0;
 
 		bool m_destroy = false;
 		
