@@ -23,8 +23,8 @@
         },
         {
             "type":"Actor",
-            "name":"Player",
-            "tag":"Player",
+            "name":"GM_Screen",
+            "active":false,
             "transform":{
                 "position":[
                     400,
@@ -38,68 +38,19 @@
             },
             "components":[
                 {
-                    "type":"PlayerComponent",
-                    "jump":10
-                },
-                {
-                    "type":"RBPhysicsComponent",
-                    "damping":0.4,
-                    "data.gravity_scale":1,
-                    "data.constrain_angle":true
-                },
-                {
-                    "type":"CollisionComponent",
-                    "data.size":[
-                        48,
-                        48
-                    ]
-                },
-                {
-                    "type":"SprAnimComponent",
-                    "default_sequence":"idle",
-                    "sequences":[
-                        {
-                            "sequence.name":"run",
-                            "sequence.fps":12,
-                            "sequence.num_columns":12,
-                            "sequence.num_rows":1,
-                            "sequence.start_frame":1,
-                            "sequence.end_frame":12,
-                            "texture_name":"Sprites/gothic-hero-run.png"
-                        },
-                        {
-                            "sequence.name":"idle",
-                            "sequence.fps":12,
-                            "sequence.num_columns":4,
-                            "sequence.num_rows":1,
-                            "sequence.start_frame":1,
-                            "sequence.end_frame":4,
-                            "texture_name":"Sprites/gothic-hero-idle.png"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type":"Actor",
-            "name":"Music",
-            "components":[
-                {
-                    "type":"AudioComponent",
-                    "sound_name":"Audio/music.mp3",
-                    "loop":true,
-                    "play_on_start":true
+                    "type":"SpriteComponent",
+                    "texture_name":"Sprites/background.png"
                 }
             ]
         },
         {
             "type":"Actor",
             "name":"Title",
-            "active":true,
+            "active":false,
             "transform":{
                 "position":[
-                    40,
-                    30
+                    235,
+                    150
                 ],
                 "scale":[
                     1,
@@ -110,9 +61,9 @@
             "components":[
                 {
                     "type":"TextComponent",
-                    "text":"*Insert Name Here*",
+                    "text":"Try  Not  to  Die",
                     "font_name":"Fonts/ArcadeClassic.ttf",
-                    "font_size":16,
+                    "font_size":48,
                     "registration":[
                         0.5,
                         0.5
@@ -133,7 +84,7 @@
             "transform":{
                 "position":[
                     40,
-                    30
+                    20
                 ],
                 "scale":[
                     1,
@@ -146,7 +97,7 @@
                     "type":"TextComponent",
                     "text":"0000",
                     "font_name":"Fonts/ArcadeClassic.ttf",
-                    "font_size":30,
+                    "font_size":48,
                     "registration":[
                         0.0,
                         0.0
@@ -160,14 +111,14 @@
                 }
             ]
         },
-                {
+        {
             "type":"Actor",
             "name":"GameOver",
             "active":false,
             "transform":{
                 "position":[
-                    40,
-                    30
+                    290,
+                    150
                 ],
                 "scale":[
                     1,
@@ -180,7 +131,7 @@
                     "type":"TextComponent",
                     "text":"Game Over",
                     "font_name":"Fonts/ArcadeClassic.ttf",
-                    "font_size":16,
+                    "font_size":48,
                     "registration":[
                         0.5,
                         0.5
@@ -214,6 +165,40 @@
                     "viewport_size":[
                         800,
                         600
+                    ]
+                }
+            ]
+        },
+        {
+            "type":"Actor",
+            "name":"Health",
+            "active":false,
+            "transform":{
+                "position":[
+                    20,
+                    60
+                ],
+                "scale":[
+                    1,
+                    1
+                ],
+                "rotation":0
+            },
+            "components":[
+                {
+                    "type":"TextComponent",
+                    "text":"00000",
+                    "font_name":"fonts/arcadeclassic.ttf",
+                    "font_size":48,
+                    "registration":[
+                        0,
+                        0.5
+                    ],
+                    "color":[
+                        255,
+                        0,
+                        0,
+                        255
                     ]
                 }
             ]

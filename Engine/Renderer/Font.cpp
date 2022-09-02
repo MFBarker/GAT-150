@@ -20,7 +20,7 @@ namespace neu
 
     bool Font::Create(const std::string name, ...)
     {
-        Load(name, 30);
+        Load(name, 48);
 
         return false;
     }

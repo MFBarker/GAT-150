@@ -1,5 +1,67 @@
 {
     "actors":[
+
+        {
+            "type":"Actor",
+            "name":"Player",
+            "tag":"Player",
+            "prefab":true,
+            "transform":{
+                "position":[
+                    400,
+                    300
+                ],
+                "scale":[
+                    1,
+                    1
+                ],
+                "rotation":0
+            },
+            "components":[
+                {
+                    "type":"PlayerComponent",
+                    "speed":20,
+                    "jump":100
+                },
+                {
+                    "type":"RBPhysicsComponent",
+                    "damping":0.4,
+                    "data.gravity_scale":1,
+                    "data.constrain_angle":true
+                },
+                {
+                    "type":"CollisionComponent",
+                    "data.size":[
+                        48,
+                        48
+                    ]
+                },
+                {
+                    "type":"SprAnimComponent",
+                    "default_sequence":"idle",
+                    "sequences":[
+                        {
+                            "sequence.name":"run",
+                            "sequence.fps":12,
+                            "sequence.num_columns":12,
+                            "sequence.num_rows":1,
+                            "sequence.start_frame":1,
+                            "sequence.end_frame":12,
+                            "texture_name":"Sprites/gothic-hero-run.png"
+                        },
+                        {
+                            "sequence.name":"idle",
+                            "sequence.fps":12,
+                            "sequence.num_columns":4,
+                            "sequence.num_rows":1,
+                            "sequence.start_frame":1,
+                            "sequence.end_frame":4,
+                            "texture_name":"Sprites/gothic-hero-idle.png"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "type":"Actor",
             "name":"Coin",
@@ -65,7 +127,7 @@
                 {
                     "type":"EnemyComponent",
                     "speed":3,
-                    "health":30,
+                    "health":1,
                     "damage":10
                 },
                 {

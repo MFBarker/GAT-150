@@ -6,6 +6,11 @@ void MyGame::Initialize()
 {
 	REGISTER_CLASS(EnemyComponent);
 
+	neu::g_audioSystem.AddAudio("background", "Audio/music.mp3");
+
+	neu::g_audioSystem.AddAudio("coin", "Audio/coin.wav");
+	neu::g_audioSystem.AddAudio("hit", "Audio/hit.wav");
+
 	m_scene = std::make_unique<neu::Scene>();
 
 	rapidjson::Document document;
@@ -43,17 +48,29 @@ void MyGame::Update()
 	switch (m_gameState) 
 	{
 	case gameState::Title_Screen:
+	{
 		m_scene->GetActorFromName("Title")->SetActive(true);
 
 		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
 		{
 			m_scene->GetActorFromName("Title")->SetActive(false);
 			m_scene->GetActorFromName("Score")->SetActive(true);
+			m_scene->GetActorFromName("Health")->SetActive(true);
 			m_gameState = gameState::Level_Start;
 		}
+	}
 		break;
 
 	case gameState::Level_Start:
+	{
+		g_audioSystem.PlayAudio("background",1.0f,1.0f,true);
+
+		auto actor = neu::Factory::Instance().Create<Actor>("Player");
+		actor->m_transform.position = { neu::randomf(0,800),100.0f };
+		actor->Initialize();
+
+		m_scene->Add(std::move(actor));
+
 		for (int i = 0; i < 10; i++)
 		{
 			auto actor = neu::Factory::Instance().Create<Actor>("Coin");
@@ -70,7 +87,9 @@ void MyGame::Update()
 
 			m_scene->Add(std::move(actor));
 		}
+
 		m_gameState = gameState::Game;
+	}
 		break;
 
 	case gameState::Game:
@@ -78,12 +97,11 @@ void MyGame::Update()
 		auto actor = m_scene->GetActorFromName("Score");
 		auto component = actor->GetComponent<neu::TextComponent>();
 		component->SetText(std::to_string(m_score));
+		if (g_inputSystem.GetKeyDown(key_death) == neu::InputSystem::Pressed)
+		{
+			m_gameState = gameState::Game_Over;
+		}
 	}
-	if (g_inputSystem.GetKeyDown(key_death) == neu::InputSystem::Pressed)
-	{
-		m_gameState = gameState::Game_Over;
-	}
-		g_inputSystem.Update();
 		break;
 	case gameState::Player_Dead:
 		m_stateTimer -= neu::g_time.deltaTime;
@@ -95,13 +113,15 @@ void MyGame::Update()
 
 	case gameState::Game_Over:
 		m_scene->GetActorFromName("Score")->SetActive(false);
-		m_scene->GetActorFromName("GameOver")->SetActive(false);
+		m_scene->GetActorFromName("Health")->SetActive(false);
+		m_scene->GetActorFromName("GameOver")->SetActive(true);
 
 		if (g_inputSystem.GetKeyDown(neu::key_enter) == neu::InputSystem::Pressed)
 		{
-			m_scene->GetActorFromName("Title")->SetActive(false);
+			m_scene->GetActorFromName("GameOver")->SetActive(false);
 			m_gameState = gameState::Title_Screen;
 		}
+	
 		break;
 	}
 

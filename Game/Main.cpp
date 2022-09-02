@@ -3,7 +3,6 @@
 
 int main()
 {
-
 	//Initialize memory
 	InitializeMemory();
 	g_renderer.Initialize();
@@ -19,12 +18,10 @@ int main()
 
 	g_renderer.CreateWindow("Neumont", 800, 600);
 
-	//fullscreen (seriously don't use it)
+	//fullscreen
 	//g_renderer.CreateWindow("Neumont", 800, 600, true);
 
 	g_renderer.SetClearColor(neu::Color{0,0,0,255});
-
-	//std::shared_ptr<neu::Texture> texture = neu::g_resources.Get<neu::Texture>("Sprites/Spaceship", &neu::g_renderer);
 
 	//create Game
 	std::unique_ptr<MyGame> game = std::make_unique<MyGame>();

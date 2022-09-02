@@ -31,6 +31,8 @@ void EnemyComponent::OnCollisionEnter(neu::Actor* other)
         event.data = damage;
         event.reciever = other;
 
+        g_audioSystem.PlayAudio("hit");
+
         neu::g_eventManager.Notify(event);
     }
 }
@@ -43,6 +45,8 @@ void EnemyComponent::OnNotify(const neu::Event& event)
 {
     if (event.name == "EVENT_DAMAGE")
     {
+        g_audioSystem.PlayAudio("hit");
+
         health -= std::get<float>(event.data);
         if (health <= 0)
         {

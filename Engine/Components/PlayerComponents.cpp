@@ -115,6 +115,8 @@ namespace neu
 			event.name = "EVENT_ADD_POINTS";
 			event.data = 100;
 
+			g_audioSystem.PlayAudio("coin");
+
 			g_eventManager.Notify(event);
 			other->SetDestroy();
 		}
@@ -126,10 +128,12 @@ namespace neu
 			event.data = damage;
 			event.reciever = other;
 
+			g_audioSystem.PlayAudio("hit");
+
 			neu::g_eventManager.Notify(event);
 		}
 
-		std::cout << "player enter \n";
+		//std::cout << "player enter \n";
 	}
 	void PlayerComponent::OnCollisionExit(Actor* other)
 	{
@@ -138,7 +142,7 @@ namespace neu
 			m_groundCount--;
 		}
 
-		std::cout << "player exit \n";
+		//std::cout << "player exit \n";
 	}
 
 	bool PlayerComponent::Write(const rapidjson::Value& value) const
