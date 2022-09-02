@@ -33,6 +33,8 @@ void MyGame::Initialize()
 
 	m_gameState = gameState::Title_Screen;
 
+	g_audioSystem.PlayAudio("background", 1.0f, 1.0f, true);
+
 	std::cout << "HINT: Press ENTER to Start \n";
 
 	neu::g_eventManager.Subscribe("EVENT_ADD_POINTS", std::bind(&MyGame::OnNotify, this, std::placeholders::_1));
@@ -63,8 +65,6 @@ void MyGame::Update()
 
 	case gameState::Level_Start:
 	{
-		g_audioSystem.PlayAudio("background",1.0f,1.0f,true);
-
 		auto actor = neu::Factory::Instance().Create<Actor>("Player");
 		actor->m_transform.position = { neu::randomf(0,800),100.0f };
 		actor->Initialize();
